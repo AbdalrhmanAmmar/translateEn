@@ -1,0 +1,257 @@
+<div *ngIf="dashboardLoading()" class="d-flex justify-content-center align-items-center py-5" style="min-height: 300px;">
+  <c-spinner size="lg" variant="grow" color="primary"></c-spinner>
+</div>
+
+
+<div class="p-3" *ngIf="!dashboardLoading()" >
+  <c-card class="p-4 shadow">
+    <form cForm [formGroup]="searchRequestForm" class="">
+      <c-row class="g-3 row-cols-auto">
+        <!-- من تاريخ -->
+        <c-col xl="4" md="6" sm="12">
+          <label cLabel class="form-label">من تاريخ</label>
+
+            <c-date-picker
+        formControlName="startDate"
+        size="sm"
+        placeholder="اختر التاريخ"
+        [locale]="'ar'"
+        dir="rtl"
+        [maxDate]="fromMaxDate"
+      />
+
+        </c-col>
+
+        <!-- إلى تاريخ -->
+        <c-col xl="4" md="6" sm="12">
+          <label cLabel class="form-label">إلى تاريخ</label>
+          <c-date-picker
+          formControlName="endDate"
+          size="sm"
+          placeholder="اختر التاريخ"
+          [disabled]="!searchRequestForm.get('startDate')?.value"
+          [locale]="'ar'"
+          dir="rtl"
+          [maxDate]="toMaxDate"
+          [minDate]="toMinDate"
+        />
+        </c-col>
+
+        <!-- اختر الطبيب -->
+        <c-col xl="4" md="6" sm="12">
+          <label cLabel class="form-label">اختر الطبيب</label>
+          <select
+            cSelect
+            class="form-select form-select-sm"
+            formControlName="doctorId"
+          >
+            <option [ngValue]="null">الكل</option>
+            @for(doc of filterLookups()?.doctors ; track doc.id){
+            <option [ngValue]="doc.id">{{ doc.value }}</option>
+            }
+          </select>
+        </c-col>
+
+        <!-- التخصص -->
+        <c-col xl="4" md="6" sm="12">
+          <label cLabel class="form-label">التخصص</label>
+          <select
+            cSelect
+            class="form-select form-select-sm"
+            formControlName="doctorSpecialization"
+          >
+            <option [ngValue]="null">الكل</option>
+            @for (spec of filterLookups()?.specialities ; track $index) {
+            <option [ngValue]="spec">{{ spec }}</option>
+            }
+          </select>
+        </c-col>
+
+        <!-- التصنيف -->
+        <c-col xl="4" md="6" sm="12">
+          <label cLabel class="form-label">التصنيف</label>
+          <select
+            cSelect
+            class="form-select form-select-sm"
+            formControlName="rank"
+          >
+            <option [ngValue]="null">الكل</option>
+            @for(segment of filterLookups()?.segments ; track $index ){
+            <option [ngValue]="segment">{{ segment }}</option>
+            }
+          </select>
+        </c-col>
+
+      
+        <!-- المنطقة -->
+        <c-col xl="4" md="6" sm="12"  [class.d-none]="!showAreaAndCityFilter()">
+          <label cLabel class="form-label">المنطقة</label>
+          <select
+            cSelect
+            class="form-select form-select-sm"
+            formControlName="area"
+          >
+            <option [ngValue]="null">الكل</option>
+            @for(area of filterLookups()?.areas ; track $index ){
+            <option [ngValue]="area">{{ area }}</option>
+            }
+          </select>
+        </c-col>
+
+        <!-- المدينة -->
+        <c-col xl="4" md="6" sm="12" [class.d-none]="!showAreaAndCityFilter()">
+          <label cLabel class="form-label">المدينة</label>
+          <select
+            cSelect
+            class="form-select form-select-sm"
+            formControlName="city"
+          >
+            <option [ngValue]="null">الكل</option>
+            @for(city of filterLookups().cities ; track $index){
+            <option [ngValue]="city">{{ city }}</option>
+            }
+          </select>
+        </c-col>
+
+      
+
+        <!-- العلامة التجارية -->
+        <c-col xl="4" md="6" sm="12">
+          <label cLabel class="form-label">العلامة التجارية</label>
+          <select
+            cSelect
+            class="form-select form-select-sm"
+            formControlName="brand"
+          >
+            <option [ngValue]="null">الكل</option>
+            @for(brand of filterLookups()?.brands ; track $index){
+            <option [ngValue]="brand">{{ brand }}</option>
+            }
+          </select>
+        </c-col>
+
+        <!-- اختر العيادة -->
+        <c-col xl="4" md="6" sm="12">
+          <label cLabel class="form-label">اختر العيادة</label>
+          <select
+            cSelect
+            class="form-select form-select-sm"
+            formControlName="organizationId"
+          >
+            <option [ngValue]="null">الكل</option>
+            @for(organization of filterLookups()?.organizations ; track
+            $index ){
+            <option [ngValue]="organization">
+              {{ organization }}
+            </option>
+            }
+          </select>
+        </c-col>
+
+            <!-- المنتج الأول -->
+            <c-col xl="4" md="6" sm="12">
+              <label cLabel class="form-label">المنتج الأول</label>
+              <select
+                cSelect
+                class="form-select form-select-sm"
+                formControlName="product1"
+              >
+                <option [ngValue]="null">الكل</option>
+                @for(product of filterLookups()?.products ; track
+                product.id){
+                <option [ngValue]="product.id">{{ product.value }}</option>
+                }
+              </select>
+            </c-col>
+
+            <!-- المنتج الثاني -->
+            <c-col xl="4" md="6" sm="12">
+              <label cLabel class="form-label">المنتج الثاني</label>
+              <select
+                cSelect
+                class="form-select form-select-sm"
+                formControlName="product2"
+              >
+                <option [ngValue]="null">الكل</option>
+                @for(product of filterLookups()?.products ; track
+                product.id){
+                <option [ngValue]="product.id">{{ product.value }}</option>
+                }
+              </select>
+            </c-col>
+
+            <!-- المنتج الثالث -->
+            <c-col xl="4" md="6" sm="12">
+              <label cLabel class="form-label">المنتج الثالث</label>
+              <select
+                cSelect
+                class="form-select form-select-sm"
+                formControlName="product3"
+              >
+                <option [ngValue]="null">الكل</option>
+                @for(product of filterLookups()?.products ; track
+                product.id){
+                <option [ngValue]="product.id">{{ product.value }}</option>
+                }
+              </select>
+            </c-col>
+
+            <c-col xl="4" md="6" sm="12" [class.d-none]="!showMedRepFilter()">
+              <label cLabel class="form-label">المندوب</label>
+              <select
+                cSelect
+                class="form-select form-select-sm"
+                formControlName="MedRepId"
+              >
+                <option [ngValue]="null">الكل</option>
+                @for(rep of filterLookups().medReps ; track
+                rep.id){
+                <option [ngValue]="rep.id">{{ rep.value }}</option>
+                }
+              </select>
+            </c-col>
+      </c-row>
+
+      <!-- إعادة ظبط-->
+      <c-row class="g-3">
+        <c-col class="text-end mt-5">
+          <button
+            (click)="onResetForm()"
+            cButton
+            type="button"
+            class="btn btn-primary btn-sm rounded p-2 d-flex align-items-center justify-content-center"
+          >
+            <svg
+          [cIcon]="icons.cilSettings"
+          class="me-2 align-middle"
+          size="lg"
+          title="Save Icon"
+            ></svg>
+            إعادة ظبط
+          </button>
+        </c-col>
+      </c-row>
+    </form>
+  </c-card>
+
+  <!-- Child Components -->
+  <app-dashboard-charts [data]="searchResponseCount()"></app-dashboard-charts>
+  <app-dashboard-table
+    [data]="itemsOnly()"
+    [pageCount]="pageCount()"
+    [pageIndex]="pageIndex()"
+    [pageSize]="pageSize()"
+    (doctorClicked)="onDoctorSelected($event)"
+    (organizationClicked)="onOrganizationSelected($event)"
+    (brandClicked)="onBrandSelected($event)"
+    (segmentClicked)="onSegmentSelected($event)"
+    (areaClicked)="onAreaSelected($event)"
+    (cityClicked)="onCitySelected($event)"
+    (productClicked)="onProductSelected($event)"
+    (pageChange)="onPageChange($event)"
+  ></app-dashboard-table>
+</div>
+
+
+<div class="p-4"></div>
+ 

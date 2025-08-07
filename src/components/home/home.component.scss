@@ -1,0 +1,33 @@
+ .widget-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-origin: center;
+    will-change: transform;
+  }
+  
+  .widget-hover:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+  }
+  
+  /* Remove any existing filter properties */
+  .widget-hover,
+  .widget-hover * {
+    filter: none !important;
+  }
+  
+  /* Basic widget styling */
+  c-widget-stat-a, c-widget-stat-b, c-widget-stat-f {
+    border-radius: 8px;
+  }
+  
+  c-col {
+    transition: all 0.3s ease;
+  }
+
+  .logo-wrapper {
+  display: flex;
+  justify-content: center;  /* horizontal centering */
+  align-items: center;      /* vertical centering */
+  height: 70vh;            /* full viewport height */
+}

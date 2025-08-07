@@ -1,0 +1,315 @@
+<h4 class="mt-2">التحصيلات المالية</h4>
+
+<div *ngIf="paymentCollectionsLoading()" class="d-flex justify-content-center align-items-center py-5" style="min-height: 300px;">
+  <c-spinner size="lg" variant="grow" color="primary"></c-spinner>
+</div>
+
+<div *ngIf="!paymentCollectionsLoading()">
+
+<div class="mt-3 w-100">
+  <c-multi-select
+    multiple
+    class="multi-custome col-sm-7 col-md-5"
+    placeholder="اختر الحالة"
+    selectAllLabel="تحديد الكل"
+    #multi="cMultiSelect"
+    (valueChange) = "filterPaymentCollections($event)"
+  >
+  <c-multi-select-option value = 1><span class="badge bg-warning">قيد الانتظار</span></c-multi-select-option>
+    <c-multi-select-option value = 2><span class="badge bg-success">تم الموافقة</span></c-multi-select-option>
+    <c-multi-select-option value = 3><span class="badge bg-danger">تم الرفض</span></c-multi-select-option>
+  </c-multi-select>
+</div>
+
+<div class="">
+  <c-smart-table
+    [columns]="paymentCollectionsColumns"
+    [items]="filteredPaymentCollections()"
+    [columnSorter]="true"
+    [sorterValue]="{ column: 'name', state: 'asc' }"
+    [tableBodyProps]="{ align: 'middle' }"
+    [tableProps]="{ hover: true, striped: true, responsive: true }"
+    clickableRows
+    header
+    [noItemsLabel]="'لا توجد تحصيلات مالية لعرضها'"
+    class="mt-3"
+    #table="cSmartTable"
+  >
+    <ng-template
+      cTemplateId="tableData"
+      let-columnName="columnName"
+      let-item="item"
+      let-tdContent="tdContent"
+      let-i="index"
+    >
+      <td>
+        @switch (columnName) {
+          @case('date') {
+            {{ tdContent | date : 'yyyy-MM-dd' }}
+          }
+          @case('Procedures') {
+            <div class="d-flex flex-wrap gap-2">
+              <button cButton (click)="selectedPaymentCollectionItem = item" [cModalToggle]="'collectionApprove'" class="border-0 bg-transparent btn btn-link p-1">
+                <svg cIcon name="cilCheck" size="lg" class="text-success"></svg>
+              </button>
+              <button cButton (click)="selectedPaymentCollectionItem = item" [cModalToggle]="'collectionReject'" class="border-0 bg-transparent btn btn-link p-1 ms-1">
+                <svg cIcon name="cilX" size="lg" class="text-danger"></svg>
+              </button>
+              <button class="btn btn-link p-1 ms-1" (click)="print(item.id)">
+                <svg [cIcon]="icons.cilPrint" width="20" class="text-primary" title="طباعة"></svg>
+              </button>
+            </div>
+          }
+          @case('statusName') {
+            <c-badge [color]="getStatusColor(item.status)" class="p-2">
+              {{ item.statusName }}
+            </c-badge>
+          }
+          @default {
+            {{ tdContent }}
+          }
+        }
+      </td>
+    </ng-template>
+
+  </c-smart-table>
+
+<c-smart-pagination
+    [activePage]="paymentCollectionsActivePage()"
+    [pages]="paymentCollectionsPages()"
+    (activePageChange) ="setPaymentCollectionsActivePage($event)">
+</c-smart-pagination>
+
+</div>
+</div>
+
+<h4 class="mt-4">طلبيات الصيدليات</h4>
+
+<!-- Loading state (shown when data is loading) -->
+<div *ngIf="pharmacyOrdersLoading()" class="d-flex justify-content-center align-items-center py-5" style="min-height: 300px;">
+  <c-spinner size="lg" variant="grow" color="primary"></c-spinner>
+</div>
+
+<!-- Content state (shown when data is loaded) -->
+<div *ngIf="!pharmacyOrdersLoading()">
+  @for (order of pharmacyOrders(); track order.id) {
+    <!-- Your existing accordion content -->
+   <c-accordion class="mt-3 shadow mb-3 rounded-5">
+  <c-accordion-item #item0="cAccordionItem" [visible]="false">
+    <ng-template cTemplateId="accordionHeaderTemplate">
+      <button
+        (click)="item0.toggleItem()"
+        [collapsed]="!item0.visible"
+        cAccordionButton
+        class="w-100 d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3"
+      >
+        <div class="d-flex flex-column">
+          <div class="d-flex align-items-center gap-2">
+            <svg
+              cIcon
+              [name]="item0.visible ? 'cilChevronTop' : 'cilChevronBottom'"
+              size="lg"
+              class="text-muted mt-1"
+            ></svg>
+            <span class="fw-bold fs-6">{{ order.organization }}</span>
+          </div>
+
+          <div class="d-flex flex-wrap mt-2 gap-3 ps-4">
+            <div class="d-flex align-items-center text-muted small">
+              <svg cIcon name="cil3d" size="sm" class="me-1"></svg>
+              {{ order.products.length }} أصناف
+            </div>
+            <div class="d-flex align-items-center text-muted small">
+              <svg cIcon name="cilDollar" size="sm" class="me-1"></svg>
+                  {{ getTotalPrice(order)  }}
+            </div>
+            <div class="d-flex align-items-center text-muted small">
+              <svg cIcon name="cilCalendar" size="sm" class="me-1"></svg>
+              {{ order.date | date: 'yyyy-MM-dd' }}
+            </div>
+          </div>
+        </div>
+
+        <div class="d-flex flex-wrap justify-content-md-end justify-content-start align-items-center gap-2 mt-3 mt-md-0">
+          <c-badge [color]="getStatusColor(order.status)" class="p-2">
+                                  {{ order.statusName }}
+                                              </c-badge>
+          <button cButton [cModalToggle]="'approve-' + order.id" class="border-0 bg-transparent">
+            <svg cIcon name="cilCheck" size="lg" class="text-success"></svg>
+          </button>
+          <button cButton [cModalToggle]="'reject-' + order.id" class="border-0 bg-transparent">
+            <svg cIcon name="cilX" size="lg" class="text-danger"></svg>
+          </button>
+        </div>
+      </button>
+    </ng-template>
+
+    <ng-template cTemplateId="accordionBodyTemplate">
+      <div class="accordion-body">
+        <div class="table-responsive">
+          <c-smart-table
+            [columns]="pharmacyOrdersColumns"
+            [items]="order.products"
+            [columnSorter]="true"
+            [itemsPerPage]="5"
+            [sorterValue]="{ column: 'name', state: 'asc' }"
+            [tableBodyProps]="{ align: 'middle' }"
+            [tableProps]="{ hover: true, striped: true, responsive: true }"
+            activePage="1"
+            clickableRows
+            header
+            [selectable]="false"
+            [noItemsLabel]="'لا توجد زيارات لعرضها'"
+            [selectAll]="false"
+            #table="cSmartTable"
+          >
+            <ng-template cTemplateId="tableSummaryRow">
+              <tr cTableColor="info">
+                <th style="width: 15%;">الاجمالي: </th>
+                <th></th>
+                <th></th>
+                <th [attr.colspan]="table.columns.length">
+                  <span class="fw-bold text-success">{{getTotalPrice(order)}} دينار ليبي</span>
+                </th>
+              </tr>
+            </ng-template>
+
+            <ng-template
+              cTemplateId="tableData"
+              let-columnName="columnName"
+              let-item="item"
+              let-tdContent="tdContent"
+              let-i="index"
+            >
+              <td>
+                @switch (columnName) {
+                  @case('total')
+                  {
+                    {{item.cost*item.quantity}} دينار ليبي
+                  }
+                  @case('date') {
+                    {{ tdContent | date : "yyyy-MM-dd" }}
+                  }
+                  @case('Procedures') {
+                    <div class="d-flex flex-wrap gap-2">
+                      <button cButton [cModalToggle]="'approve-' + order.id" class="border-0 bg-transparent btn btn-link p-1">
+                        <svg cIcon name="cilCheck" size="lg" class="text-success"></svg>
+                      </button>
+                      <button cButton [cModalToggle]="'reject-' + order.id" class="border-0 bg-transparent btn btn-link p-1">
+                        <svg cIcon name="cilX" size="lg" class="text-danger"></svg>
+                      </button>
+                      <button class="btn btn-link p-1" (click)="print(item.id)">
+                        <svg [cIcon]="icons.cilPrint" width="20" class="text-primary" title="طباعة"></svg>
+                      </button>
+                    </div>
+                  }
+                  @case('products') {
+                    @for (product of item.products; track $index) {
+                      <p class="mb-1">{{ product.name }}</p>
+                    }
+                  }
+                  @default {
+                    {{ tdContent }}
+                  }
+                }
+              </td>
+            </ng-template>
+          </c-smart-table>
+        </div>
+      </div>
+    </ng-template>
+  </c-accordion-item>
+
+  <!-- Modal Approve -->
+  <c-modal [id]="'approve-' + order.id" alignment="center" #orderApproveModal="cModal">
+    <c-modal-header>
+      <h5 cModalTitle>الموافقة على الطلب ؟</h5>
+      <button [cModalToggle]="'approve-' + order.id" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>بعد الموافقة على الطلب لن يمكنك التراجع عن ذلك، هل أنت متأكد؟</c-modal-body>
+    <c-modal-footer>
+      <button [cModalToggle]="'approve-' + order.id" cButton color="success" class="text-white" (click)="approveCollectionOrOrder(order.id, 2, orderApproveModal)">الموافقة على الطلب</button>
+      <button [cModalToggle]="'approve-' + order.id" cButton color="secondary" class="text-white">الغاء العملية</button>
+    </c-modal-footer>
+  </c-modal>
+
+  <!-- Modal Reject -->
+  <c-modal [id]="'reject-' + order.id" alignment="center" #orderRejectModal="cModal">
+    <c-modal-header>
+      <h5 cModalTitle>رفض الطلب ؟</h5>
+      <button [cModalToggle]="'reject-' + order.id" cButtonClose></button>
+    </c-modal-header>
+    <c-modal-body>بعد رفض الطلب لن يمكنك التراجع عن ذلك، هل أنت متأكد؟</c-modal-body>
+    <c-modal-footer>
+      <button   [cModalToggle]="'reject-' + order.id" cButton color="danger" class="text-white" (click)="rejectCollectionOrOrder(order.id, 2, orderRejectModal)">رفض الطلب</button>
+      <button [cModalToggle]="'reject-' + order.id" cButton color="secondary" class="text-white">الغاء العملية</button>
+    </c-modal-footer>
+  </c-modal>
+</c-accordion>
+  }
+
+  @if (pharmacyOrders().length === 0) {
+<div class="d-flex justify-content-center align-items-center py-5" style="min-height: 300px;">
+  <p class="text-muted fs-5">لا توجد طلبيات لعرضها</p>
+</div>
+}
+  
+  <c-smart-pagination
+    [activePage]="pharmacyOrdersActivePage()"
+    [pages]="pharmacyOrdersPages()"
+    (activePageChange)="setPharmacyOrdersActivePage($event)">
+  </c-smart-pagination>
+</div>
+
+  <!-- مودال موافقة التحصيل -->
+<c-modal id="collectionApprove" alignment="center" #collectionApproveModal="cModal">
+  <c-modal-header>
+    <h5 cModalTitle>الموافقة على التحصيل ؟</h5>
+    <button [cModalToggle]="'collectionApprove'" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    بعد الموافقة على التحصيل لن يمكنك التراجع عن ذلك، هل أنت متأكد؟
+  </c-modal-body>
+  <c-modal-footer>
+    <button
+      cButton
+      color="success"
+      class="text-white"
+      (click)="approveCollectionOrOrder(selectedPaymentCollectionItem!.id!, 1, collectionApproveModal)"
+    >
+      الموافقة على التحصيل
+    </button>
+    <button [cModalToggle]="'collectionApprove'" cButton color="secondary" class="text-white">
+      الغاء العملية
+    </button>
+  </c-modal-footer>
+</c-modal>
+
+<!-- مودال رفض التحصيل -->
+<c-modal id="collectionReject" alignment="center" #collectionRejectModal="cModal">
+  <c-modal-header>
+    <h5 cModalTitle>رفض التحصيل ؟</h5>
+    <button [cModalToggle]="'collectionReject'" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    بعد رفض التحصيل لن يمكنك التراجع عن ذلك، هل أنت متأكد؟
+  </c-modal-body>
+  <c-modal-footer>
+    <button
+      cButton
+      color="danger"
+      class="text-white"
+      (click)="rejectCollectionOrOrder(selectedPaymentCollectionItem!.id!, 1, collectionRejectModal)"
+    >
+      رفض التحصيل
+    </button>
+    <button [cModalToggle]="'collectionReject'" cButton color="secondary" class="text-white">
+      الغاء العملية
+    </button>
+  </c-modal-footer>
+</c-modal>
+<div class="pb-5"></div>
+<div class="pb-5"></div>
+
+
+

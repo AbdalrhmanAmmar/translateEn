@@ -1,0 +1,64 @@
+<c-card class="p-4 shadow-lg">
+  <h4 class="mb-4">رفع ملف بيانات</h4>
+
+  <c-row class="g-3">
+    <c-col sm="12" md="6">
+      <label for="sheetType" class="form-label">نوع الملف</label>
+      <select
+        cSelect
+        class="form-select"
+        id="sheetType"
+        (change)="onFileTypeSelected()"
+      >
+        <option value=null disabled selected >اختر نوع الملف</option>
+        <option value="">مستحدمين</option>
+        <option value="">مناطق ومدن</option>
+        <option value="">منتجات</option>
+        <option value="">رسائل منتجات</option>
+        <option value="">صيدليات</option>
+        <option value="">اطباء</option>
+      </select>
+    </c-col>
+
+    <c-col sm="12" md="6">
+      <label for="fileUpload" class="form-label">تحميل الملف</label>
+      <input
+        type="file"
+        class="form-control"
+        id="fileUpload"
+        (change)="onFileSelected($event)"
+        [disabled]="!isFileTypeSelected()"
+      />
+    </c-col>
+  </c-row>
+
+  <div *ngIf="uploadStatus" class="mt-3 alert alert-info">
+    {{ uploadStatus }}
+  </div>
+
+  <div *ngIf="previewData?.length" class="mt-4 table-responsive">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th *ngFor="let col of previewColumns">{{ col }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of previewData">
+          <td *ngFor="let col of previewColumns">{{ row[col] }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-4 d-flex justify-content-end">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="submitData()"
+      [disabled]="!previewData?.length"
+    >
+      حفظ في قاعدة البيانات
+    </button>
+  </div>
+</c-card>

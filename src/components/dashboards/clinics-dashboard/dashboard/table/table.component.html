@@ -1,0 +1,526 @@
+<h3 class="my-4">قائمة الزيارات</h3>
+<c-smart-table
+  #smartTable="cSmartTable"
+  [columnSorter]="true"
+  [columns]="columns"
+  [items]="visits()"
+  [sorterValue]="{ column: 'name', state: 'asc' }"
+  [tableBodyProps]="{ align: 'middle' }"
+  [tableProps]="{ hover: true, striped: true, responsive: true }"
+  cleaner
+  clickableRows
+  header
+  pagination
+  [tableFilter]="true"
+  [tableFilterPlaceholder]="'ابحث...'"
+  [tableFilterLabel]="'البحث بقيمة'"
+  [noItemsLabel]="'لا توجد زيارات لعرضها'"
+  [tableFilterPlaceholder]="'ابحث هنا...'"
+  class="visit-table-custom"
+  [selectAll]="false"
+>
+  <ng-template
+    cTemplateId="tableData"
+    let-columnName="columnName"
+    let-item="item"
+    let-tdContent="tdContent"
+  >
+    <td>
+      @switch (columnName) { @case ('visitTime') {
+      {{ formatTime(tdContent) }}
+      } @case ('visitDetails') {
+      <button
+        [cModalToggle]="visitDetailsModal.id"
+        (click)="onGetVisitDetails(item.visitId)"
+        cButton
+        color="primary"
+        size="sm"
+        variant="outline"
+      >
+        عرض الزيارة
+      </button>
+      } @case('doctorDetails') {
+      <button
+        [cModalToggle]="doctorDetailsModal.id"
+        (click)="onGetDoctorDetails(item.doctorId)"
+        cButton
+        color="primary"
+        size="sm"
+        variant="outline"
+      >
+        عرض الطبيب
+      </button>
+      } @case('organization'){
+      <a
+        style="color: blue"
+        (click)="onOrganizationClick(item.organization.id)"
+      >
+        {{ tdContent.value }}
+      </a>
+      } @case('doctorName'){
+      <a style="color: blue" (click)="onDoctorClick(item.doctorId)">
+        {{ tdContent }}
+      </a>
+      } @default {
+      {{ tdContent }}
+      } }
+    </td>
+  </ng-template>
+</c-smart-table>
+
+<c-smart-pagination
+    [activePage]="pageIndex()"
+    [pages]="pageCount()"
+    (activePageChange) ="onPageChange($event)">
+</c-smart-pagination>
+
+<c-modal
+  #visitDetailsModal
+  alignment="center"
+  id="visitDetailsModal"
+  [backdrop]="true"
+  [keyboard]="true"
+  size="lg"
+>
+  <c-modal-header class="visit-card-header">
+    <div class="visit-card-title">
+      <h5 cModalTitle>تفاصيل الزيارة</h5>
+      <div class="visit-card-subtitle">سجل الزيارة الطبية</div>
+    </div>
+    <button [cModalToggle]="visitDetailsModal.id" cButtonClose class="white-close-btn"></button>
+  </c-modal-header>
+  <c-modal-body class="visit-card-body">
+
+    <div *ngIf="moreDetailsLoading()" class="d-flex justify-content-center align-items-center py-5" style="min-height: 300px;">
+        <c-spinner size="lg" variant="grow" color="primary"></c-spinner>
+    </div>
+<div *ngIf="!moreDetailsLoading()" >
+    <div class="visit-info-container">
+      <div class="visit-info-section">
+        <h3 class="section-title">
+          <i class="fas fa-calendar-alt section-icon"></i>
+          معلومات الزيارة
+        </h3>
+        <div class="info-grid">
+          <div class="info-row">
+            <span class="info-title">التاريخ:</span>
+            <span class="info-content">{{ moreDetails().visitDate }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-title">الوقت:</span>
+            <span class="info-content">{{ formatTime(moreDetails().visitTime) }}</span>
+          </div>
+          
+          <div class="info-row">
+            <span class="info-title">الطبيب:</span>
+            <span class="info-content">
+              <a role="button" class="info-link" (click)="onDoctorClick(moreDetails().doctor?.id)">
+                {{ moreDetails().doctor?.value }}
+              </a>
+            </span>
+          </div>
+          <div class="info-row">
+            <span class="info-title">العيادة:</span>
+            <span class="info-content">
+              <a role="button" class="info-link" (click)="onOrganizationClick(moreDetails().organization)">
+                {{ moreDetails().organization }}
+              </a>
+            </span>
+          </div>
+          <div class="info-row">
+            <span class="info-title">المنطقة:</span>
+            <span class="info-content">
+              <a role="button" class="info-link" (click)="onAreaClick(moreDetails().area)">
+                {{ moreDetails().area }}
+              </a>
+            </span>
+          </div>
+          <div class="info-row">
+            <span class="info-title">المدينة:</span>
+            <span class="info-content">
+              <a role="button" class="info-link" (click)="onCityClick(moreDetails().city)">
+                {{ moreDetails().city }}
+              </a>
+            </span>
+          </div>
+          <div class="info-row">
+            <span class="info-title">العنوان:</span>
+            <span class="info-content">{{ moreDetails().address }}</span>
+          </div>
+          <div class="info-row">
+            <span class="info-title">العلامة التجارية:</span>
+            <span class="info-content">
+              @for(brand of moreDetails().brands; let i = $index; track i)
+              {
+                <a role="button" class="info-link data-link mx-2" [ngClass]="'brand-color-' + (i % 3 + 1)" (click)="onBrandClick(brand)">
+                  {{ brand }}
+                </a>
+              
+              }
+            </span>
+          </div>
+          <div class="info-row">
+            <span class="info-title">التصنيف:</span>
+            <span class="info-content">
+              <a role="button" class="info-link" (click)="onSegmentClick(moreDetails().segment)">
+                {{ moreDetails().segment }}
+              </a>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="products-section">
+        <h3 class="section-title">
+          <i class="fas fa-pills section-icon"></i>
+          المنتجات والعينات
+        </h3>
+        <div class="products-grid">
+          @for(pro of moreDetails().products; let i = $index; track i) {
+          <div class="product-card" [ngClass]="'product-color-' + (i % 4 + 1)">
+            <div class="product-row">
+              <span class="product-label">المنتج:</span>
+              <a role="button" class="product-name" (click)="onProductClick(pro.id)">
+                {{ pro.name }}
+              </a>
+            </div>
+            <div class="product-row">
+              <span class="product-label">العينات:</span>
+              <span class="product-value">
+                <i class="fas fa-flask"></i> {{ pro.samples }}
+              </span>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+    </div>
+  </c-modal-body>
+  <c-modal-footer class="visit-card-footer">
+    <button [cModalToggle]="visitDetailsModal.id" cButton color="primary" class="visit-close-btn">
+      إغلاق
+    </button>
+  </c-modal-footer>
+</c-modal>
+
+
+<c-modal
+  #doctorDetailsModal
+  alignment="center"
+  id="doctorDetailsModal"
+  class="w-100"
+  [backdrop] ="true"
+  [keyboard]="true"
+  size ="lg"
+>
+  <c-modal-header class="visit-card-header">
+    <div class="id-card-title">
+      <h5 cModalTitle>بطاقة التعريف الطبية</h5>
+      <div class="id-card-subtitle">معلومات الطبيب</div>
+    </div>
+    <button [cModalToggle]="doctorDetailsModal.id" cButtonClose class="white-close-btn"></button>
+  </c-modal-header>
+  <c-modal-body class="id-card-body">
+
+     <div *ngIf="doctorDetailsLoading()" class="d-flex justify-content-center align-items-center py-5" style="min-height: 300px;">
+        <c-spinner size="lg" variant="grow" color="primary"></c-spinner>
+    </div>
+<div *ngIf="!doctorDetailsLoading()" >
+    <div class="id-card-photo-placeholder">
+      <img src="assets/images/doctor.png" alt="صورة الطبيب" class="img-thumbnail overflow-hidden rounded-circle id-card-photo">
+    </div>
+    
+    <div class="id-card-info">
+      <c-row class="id-card-row">
+        <c-col class="id-card-col">
+          <p><strong>الاسم:</strong> <span class="id-card-value">{{ doctorDetails().name }}</span></p>
+        </c-col>
+      </c-row>
+      <c-row class="id-card-row">
+        <c-col class="id-card-col">
+          <p><strong>الوظيفة:</strong> <span class="id-card-value">{{ doctorDetails().profile }}</span></p>
+        </c-col>
+        <c-col class="id-card-col">
+          <p><strong>التخصص:</strong> <span class="id-card-value">{{ doctorDetails().speciality }}</span></p>
+        </c-col>
+      </c-row>
+      <c-row class="id-card-row">
+        <c-col class="id-card-col">
+          <p><strong>الجهة:</strong> <span class="id-card-value">{{ doctorDetails().organizationName }}</span></p>
+        </c-col>
+        <c-col class="id-card-col">
+          <p><strong>نوع الجهة:</strong> <span class="id-card-value">{{ doctorDetails().organizationType }}</span></p>
+        </c-col>
+      </c-row>
+      <c-row class="id-card-row">
+        <c-col class="id-card-col">
+          <p><strong>المدينة:</strong> <span class="id-card-value">{{ doctorDetails()?.location?.city }}</span></p>
+        </c-col>
+        <c-col class="id-card-col">
+          <p><strong>المنطقة:</strong> <span class="id-card-value">{{ doctorDetails()?.location?.area }}</span></p>
+        </c-col>
+        <c-col class="id-card-col">
+          <p><strong>الحي:</strong> <span class="id-card-value">{{ doctorDetails()?.location?.district }}</span></p>
+        </c-col>
+      </c-row>
+      <c-row class="id-card-row">
+        <c-col class="id-card-col">
+          <p><strong>الفئة:</strong> <span class="id-card-value">{{ doctorDetails().brand }}</span></p>
+        </c-col>
+        <c-col class="id-card-col">
+          <p><strong>التصنيف:</strong> <span class="id-card-value">{{ doctorDetails().segment }}</span></p>
+        </c-col>
+      </c-row>
+      <c-row class="id-card-row">
+        <c-col class="id-card-col">
+          <p><strong>عدد الزيارات المستهدفة:</strong> <span class="id-card-value">{{ doctorDetails().targetFrequency }}</span></p>
+        </c-col>
+        <c-col class="id-card-col">
+          <p><strong>مسئول قرار:</strong> <span class="id-card-value">{{ doctorDetails().keyOpinionLeader ? 'نعم' : 'لا' }}</span></p>
+        </c-col>
+      </c-row>
+      <c-row class="id-card-row">
+        <c-col class="id-card-col">
+          <p><strong>رقم الهاتف:</strong> <span class="id-card-value">{{ doctorDetails().phone }}</span></p>
+        </c-col>
+      </c-row>
+<c-row class="id-card-row">
+  <c-col class="id-card-col">
+    <p>
+      <a 
+        role="button" 
+        class="data-link visits"
+        (click)="showVisitsModal('doctorDetailsModal')"
+      >
+        <strong>اجمالي الزيارات:</strong> 
+        {{ doctorDetails().visitsCount || 0 }}
+      </a>
+    </p>
+  </c-col>
+  
+  <!-- Total Samples -->
+  <c-col class="id-card-col">
+    <p>
+      <a 
+        role="button" 
+        class="data-link samples"
+        (click)="showSamplesModal('doctorDetailsModal')"
+      >
+        <i class="fas fa-flask"></i>
+        <strong>اجمالي العينات:</strong> 
+        {{ doctorDetails().sampleRequestsCount || 0 }}
+      </a>
+    </p>
+  </c-col>
+  
+  <!-- Total Sales -->
+  <c-col class="id-card-col">
+    <p>
+      <a 
+        role="button" 
+        class="data-link sales"
+        (click)="showSalesModal('doctorDetailsModal')"
+      >
+        <i class="fas fa-shopping-cart"></i>
+        <strong>اجمالي طلبات المبيعات:</strong> 
+        {{ doctorDetails().saleRequestsCount || 0 }}
+      </a>
+    </p>
+  </c-col>
+</c-row>
+    </div>
+</div>
+  </c-modal-body>
+  <c-modal-footer class="id-card-modal-footer">
+    <button [cModalToggle]="doctorDetailsModal.id" cButton color="primary" class="visit-close-btn">
+      إغلاق
+    </button>
+  </c-modal-footer>
+</c-modal>
+
+<c-modal
+  (visibleChange)="onSamplesModalClose($event)"
+  #samplesModal
+  alignment="center"
+  id="samplesModal"
+  [backdrop]="true"
+  [keyboard]="true"
+  size="lg"
+>
+  <c-modal-header class="visit-card-header">
+    <div class="visit-card-title">
+      <h5 cModalTitle>اجمالي طلبات العينات</h5>
+      <div class="visit-card-subtitle">سجل طلبات العينات المقدمة</div>
+    </div>
+    <button [cModalToggle]="samplesModal.id" cButtonClose class="white-close-btn"></button>
+  </c-modal-header>
+  <c-modal-body class="visit-card-body">
+    <c-smart-table
+      [columns]="sampleColumns"
+      [items]="doctorExtraDetailsResponse().items"
+      [tableBodyProps]="{ align: 'middle' }"
+      [tableProps]="{ hover: true, striped: true, responsive: true }"
+      header
+      pagination
+      [noItemsLabel]="'لا توجد بيانات لعرضها'"
+        [tableFilter]="true"
+  [tableFilterPlaceholder]="'ابحث...'"
+  [tableFilterLabel]="'البحث بقيمة'"
+  [noItemsLabel]="'لا توجد زيارات لعرضها'"
+  [tableFilterPlaceholder]="'ابحث هنا...'"
+  cleaner
+    >
+      <ng-template
+        cTemplateId="tableData"
+        let-columnName="columnName"
+        let-item="item"
+        let-tdContent="tdContent"
+      >
+        <td>
+          {{ tdContent }}
+        </td>
+      </ng-template>
+    </c-smart-table>
+
+    <c-smart-pagination
+    [activePage]="doctorDetailsSamplesPageIndex()"
+    [pages]="doctorExtraDetailsResponse().pageCount ?? 0"
+    (activePageChange) ="onSamplesPageChange($event)">
+</c-smart-pagination>
+
+  </c-modal-body>
+  <c-modal-footer class="visit-card-footer">
+     <button 
+    (click)="closeSamplesModal()"  
+    cButton 
+    color="primary" 
+    class="visit-close-btn"
+  >
+    إغلاق
+  </button>
+  </c-modal-footer>
+</c-modal>
+
+<c-modal
+  #salesModal
+  alignment="center"
+  id="salesModal"
+  class="w-100"
+  [backdrop]="true"
+  [keyboard]="true"
+  size="lg"
+  (visibleChange)="onSalesModalClose($event)"
+>
+  <c-modal-header class="visit-card-header">
+    <div class="visit-card-title">
+      <h5 cModalTitle>اجمالي طلبات المبيعات</h5>
+      <div class="visit-card-subtitle">سجل طلبات المبيعات المقدمة</div>
+    </div>
+    <button [cModalToggle]="salesModal.id" cButtonClose class="white-close-btn"></button>
+  </c-modal-header>
+  <c-modal-body class="visit-card-body">
+    <c-smart-table
+      [columns]="salesColumns"
+      [items]="doctorExtraDetailsResponse().items"
+      [tableBodyProps]="{ align: 'middle' }"
+      [tableProps]="{ hover: true, striped: true, responsive: true }"
+      header
+      pagination
+      [noItemsLabel]="'لا توجد طلبات لعرضها'"
+        [tableFilter]="true"
+  [tableFilterPlaceholder]="'ابحث...'"
+  [tableFilterLabel]="'البحث بقيمة'"
+  [noItemsLabel]="'لا توجد زيارات لعرضها'"
+  [tableFilterPlaceholder]="'ابحث هنا...'"
+  cleaner
+    >
+      <ng-template
+        cTemplateId="tableData"
+        let-columnName="columnName"
+        let-item="item"
+        let-tdContent="tdContent"
+      >
+        <td>
+          @switch (columnName) { 
+            @case ('date') {
+              {{ formatDate(tdContent) }} <!-- Add date formatting -->
+            } 
+            @default {
+              {{ tdContent }}
+            }
+          }
+        </td>
+      </ng-template>
+    </c-smart-table>
+
+    <c-smart-pagination
+    [activePage]="doctorDetailsSalesPageIndex()"
+    [pages]="doctorExtraDetailsResponse().pageCount ?? 0"
+    (activePageChange) ="onSalesPageChange($event)">
+</c-smart-pagination>
+  </c-modal-body>
+  <c-modal-footer class="visit-card-footer">
+    <button 
+      (click)="closeSalesModal()" 
+      cButton 
+      color="primary" 
+      class="visit-close-btn"
+    >
+      إغلاق
+    </button>
+  </c-modal-footer>
+</c-modal>
+
+<c-modal
+  #visitsModal
+  alignment="center"
+  id="visitsModal"
+  [backdrop]="true"
+  [keyboard]="true"
+  size="lg"
+  (visibleChange)="onVisitsModalClose($event)"
+>
+  <c-modal-header class="visit-card-header" >
+    <div class="visit-card-title">
+      <h5 cModalTitle>اجمالي الزيارات</h5>
+      <div class="visit-card-subtitle">سجل الزيارات المسجلة</div>
+    </div>
+    <button [cModalToggle]="visitsModal.id" cButtonClose class="white-close-btn"></button>
+  </c-modal-header>
+  <c-modal-body class="visit-card-body">
+    <c-smart-table
+      [columns]="visitsColumns"
+      [items]="doctorExtraDetailsResponse().items"
+      [tableProps]="{ hover: true, striped: true }"
+      header
+      pagination
+        [tableFilter]="true"
+  [tableFilterPlaceholder]="'ابحث...'"
+  [tableFilterLabel]="'البحث بقيمة'"
+  [noItemsLabel]="'لا توجد زيارات لعرضها'"
+  [tableFilterPlaceholder]="'ابحث هنا...'"
+  cleaner
+    >
+      <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item">
+        <td>
+          @switch (columnName) {
+            @default { {{ item[columnName] }} }
+          }
+        </td>
+      </ng-template>
+    </c-smart-table>
+
+    <c-smart-pagination
+      [activePage]="doctorDetailsVisitsPageIndex()"
+      [pages]="doctorExtraDetailsResponse().pageCount ?? 0"
+      (activePageChange) ="onVisitsPageChange($event)">
+    </c-smart-pagination>
+
+  </c-modal-body>
+  <c-modal-footer class="visit-card-footer">
+    <button (click)="closeVisitsModal()" cButton color="primary">
+      إغلاق
+    </button>
+  </c-modal-footer>
+</c-modal>

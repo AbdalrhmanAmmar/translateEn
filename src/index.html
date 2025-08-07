@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <base href="/" />
+    <meta
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+      name="viewport"
+    />
+    <meta content="اسناد" name="description" />
+    <meta content="esnad Team" name="author" />
+    <meta content="esnad" name="keyword" />
+    <link href="assets/images/logo-round.svg" rel="icon" type="image/x-icon" />
+    <title>اسناد</title>
+  </head>
+  <body>
+    <noscript>يرجى تفعيل تشغيل الجافا سكريبت لهذا الموقع</noscript>
+    <app-root>
+    </app-root>
+    <script>
+      // Set initial language and direction
+      const savedLang = localStorage.getItem('esnad-language') || 'ar';
+      const isRTL = savedLang === 'ar';
+      document.documentElement.setAttribute('lang', savedLang);
+      document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+      document.body.classList.add(isRTL ? 'rtl' : 'ltr');
+    </script>
+  </body>
+</html>

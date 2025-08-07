@@ -1,0 +1,96 @@
+/* You can add global styles to this file, and also import other style files */
+
+// Import styles with default layout.
+@use "@coreui/coreui-pro/scss/coreui" as * with (
+  // If you want to override variables do it here
+  $enable-deprecation-messages: false,
+);
+
+// Import Chart.js custom tooltips styles
+@use "@coreui/chartjs/scss/coreui-chartjs" as *;
+
+// Custom styles for this theme
+@use "theme";
+
+// Some temp fixes
+//@use "fixes";
+
+// If you want to add custom CSS you can put it here.
+@use "custom";
+
+// Language-specific styles
+@use "language";
+
+// Examples
+// We use those styles to show code examples, you should remove them in your application.
+@use "examples";
+
+ select
+{
+  background-position: left 10% center !important;
+}
+
+.swal2-timer-progress-bar {
+  background-color: white !important;
+
+}
+
+.swal2-popup{
+  height: 180px !important; /* set desired height */
+  width: 400px !important;
+  border-radius: 14px !important;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;  
+  text-align: center;
+}
+
+.swal2-title {
+  font-size: 30px !important;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding-top: 6px;
+  padding-bottom: 0;
+}
+
+.swal2-html-container {
+  font-size: 20px !important;
+  font-weight: normal;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding-bottom: 0;
+  padding-top: 5px;
+  overflow: hidden !important;
+}
+
+.swal2-loader {
+  border-color: white !important;
+  border-top-color: transparent !important;
+}
+
+
+/* styles.scss */
+
+select.ng-invalid.ng-touched,
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched,
+c-date-picker.ng-invalid.ng-touched .form-control {
+  border-bottom: 2px solid #dc3545 !important;
+}
+
+select.ng-valid.ng-touched,
+input.ng-valid.ng-touched,
+textarea.ng-valid.ng-touched,
+c-date-picker.ng-valid.ng-touched .form-control {
+  border-bottom: 2px solid #198754 !important;
+}
+
+
+
+
+
+

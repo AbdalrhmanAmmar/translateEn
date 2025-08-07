@@ -1,0 +1,113 @@
+// Language-specific styling
+
+// RTL/LTR body classes
+body.rtl {
+  direction: rtl;
+  text-align: right;
+}
+
+body.ltr {
+  direction: ltr;
+  text-align: left;
+}
+
+// Language switcher animations
+.language-switcher {
+  .language-toggle-btn {
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    &:hover::before {
+      left: 100%;
+    }
+  }
+}
+
+// Smooth transitions for direction changes
+* {
+  transition: text-align 0.3s ease, direction 0.3s ease;
+}
+
+// Font adjustments for different languages
+[lang="ar"] {
+  font-family: 'Tajawal', 'Cairo', 'Amiri', sans-serif;
+}
+
+[lang="en"] {
+  font-family: 'Inter', 'Roboto', 'Segoe UI', sans-serif;
+}
+
+// Select dropdown positioning for both languages
+[dir="rtl"] select {
+  background-position: left 2% center !important;
+}
+
+[dir="ltr"] select {
+  background-position: right 2% center !important;
+}
+
+// Responsive language switcher
+@media (max-width: 768px) {
+  .language-switcher {
+    .language-toggle-btn {
+      padding: 6px 12px;
+      
+      .language-display {
+        gap: 6px;
+        
+        .lang-code {
+          font-size: 11px;
+        }
+      }
+    }
+    
+    .language-menu {
+      min-width: 180px;
+    }
+  }
+}
+
+// Enhanced hover effects
+.language-option {
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.1), transparent);
+    transition: left 0.3s ease;
+  }
+  
+  &:hover::before {
+    left: 100%;
+  }
+}
+
+// Accessibility improvements
+.language-switcher {
+  button:focus {
+    outline: 2px solid #667eea;
+    outline-offset: 2px;
+  }
+  
+  .language-option:focus {
+    outline: 2px solid #667eea;
+    outline-offset: -2px;
+  }
+}

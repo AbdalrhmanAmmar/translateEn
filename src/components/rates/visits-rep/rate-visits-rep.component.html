@@ -1,0 +1,234 @@
+<c-card class="mb-4">
+  <c-card-header class="bg-primary text-white">
+    <h3 class="mb-0">نموذج تقييم المندوب</h3>
+  </c-card-header>
+  <c-card-body>
+    <form [formGroup]="ratingsForm">
+      <c-row class="g-3 mb-4">
+        <c-col md="6">
+          <div class="">
+            <select 
+              cSelect
+              cFormControl
+              formControlName="medRep"
+              id="medRepSelect"
+              class="form-select-lg"
+              (change)="onMedRepChange($event.target.value)"
+            >
+              <option [value]="null" disabled selected>اختر اسم المندوب</option>
+              @for(medRep of medReps(); track medRep) {
+                <option [value]="medRep.id">{{ medRep.value }}</option>
+              }
+            </select>
+          </div>
+        </c-col>
+        
+        <c-col md="6">
+          <div class="">
+            <select
+              cSelect
+              cFormControl
+              formControlName="ClinicVisitId"
+              id="ClinicVisitId"
+              class="form-select-lg"
+            >
+              <option [value]="null" disabled selected>اختر كود الزيارة</option>
+              @for(code of medRepsVisitsCodes(); track code) {
+                <option [value]="code">{{ code }}</option>
+              }
+            </select>
+          </div>
+        </c-col>
+      </c-row>
+
+      <c-row class="mb-4">
+        <c-col>
+          <div class="form-floating">
+            <input
+              cFormControl
+              formControlName="title"
+              type="text"
+              id="reportTitle"
+              class="form-control-lg"
+              placeholder="أدخل عنوان التقرير"
+            />
+            <label for="reportTitle" class="text-muted">عنوان التقرير</label>
+          </div>
+        </c-col>
+      </c-row>
+
+      @for(section of sections ; track $index) {
+      <c-card class="mb-4 border-0 shadow-sm">
+        <c-card-header class="bg-light">
+          <h4 class="mb-0 text-primary">{{ section }}</h4>
+        </c-card-header>
+        <c-card-body>
+          @for(q of questions; let i = $index; track i) { 
+            @if(q.section === section) {
+            <div class="mb-4 p-3 rounded-3" [ngClass]="{'bg-light': $even, 'bg-white': $odd}">
+              <c-row class="align-items-center">
+                <c-col md="8">
+                  <h5 class="mb-1">{{ q.title }}</h5>
+                  <small class="text-muted">({{ q.points }} نقاط)</small>
+                </c-col>
+                <c-col md="4" class="text-end">
+                  <div class="d-flex flex-column align-items-end">
+                    <c-rating
+                      [(value)]="ratings[i]"
+                      precision="0.5"
+                      size="lg"
+                      [itemCount]="q.points"
+                      [customIcon]="icons.cilStar"
+                      class="mb-2"
+                    />
+                    @if (getRatingValue(i)) {
+                      <div class="badge bg-primary rounded-pill">
+                        {{ getRatingValue(i) }} / {{ q.points }}
+                      </div>
+                    }
+                  </div>
+                </c-col>
+              </c-row>
+            </div>
+            } 
+          }
+        </c-card-body>
+      </c-card>
+      }
+
+      <c-row class="g-3 mb-4">
+        <c-col md="6">
+          <div class="form-floating">
+            <textarea
+              formControlName="recommendation"
+              cFormControl
+              id="recommendationTextarea"
+              class="form-control-lg"
+              style="height: 120px"
+              placeholder="أدخل التوصية هنا ..."
+            ></textarea>
+            <label for="recommendationTextarea" class="text-muted">التوصية</label>
+          </div>
+        </c-col>
+        <c-col md="6">
+          <div class="form-floating">
+            <textarea
+              formControlName="notes"
+              cFormControl
+              id="notesTextarea"
+              class="form-control-lg"
+              style="height: 120px"
+              placeholder="أضف أي ملاحظات أو تعليقات هنا ..."
+            ></textarea>
+            <label for="notesTextarea" class="text-muted">ملاحظات إضافية</label>
+          </div>
+        </c-col>
+      </c-row>
+
+      <c-row class="g-3 mb-4">
+        <c-col md="3">
+          <c-card class="h-100 border-0 shadow-sm">
+            <c-card-body class="text-center">
+              <h6 class="card-title text-muted">التخطيط</h6>
+              <small class="text-muted">(15%)</small>
+              <p class="display-6 text-danger fw-bold">{{ totalPlanning }}</p>
+            </c-card-body>
+          </c-card>
+        </c-col>
+        <c-col md="3">
+          <c-card class="h-100 border-0 shadow-sm">
+            <c-card-body class="text-center">
+              <h6 class="card-title text-muted">السمات الشخصية</h6>
+              <small class="text-muted">(20%)</small>
+              <p class="display-6 text-warning fw-bold">{{ totalPersonalTraits }}</p>
+            </c-card-body>
+          </c-card>
+        </c-col>
+        <c-col md="3">
+          <c-card class="h-100 border-0 shadow-sm">
+            <c-card-body class="text-center">
+              <h6 class="card-title text-muted">المعرفة</h6>
+              <small class="text-muted">(10%)</small>
+              <p class="display-6 text-success fw-bold">{{ totalKnowledge }}</p>
+            </c-card-body>
+          </c-card>
+        </c-col>
+        <c-col md="3">
+          <c-card class="h-100 border-0 shadow-sm">
+            <c-card-body class="text-center">
+              <h6 class="card-title text-muted">مهارات البيع</h6>
+              <small class="text-muted">(55%)</small>
+              <p class="display-6 text-info fw-bold">{{ totalSellingSkills }}</p>
+            </c-card-body>
+          </c-card>
+        </c-col>
+      </c-row>
+
+      <c-row class="mb-4">
+        <c-col>
+          <c-card class="border-0 shadow">
+            <c-card-body>
+              <c-row class="align-items-center">
+                <c-col md="6">
+                  <h4 class="mb-3">النتيجة الإجمالية</h4>
+                  <div class="d-flex align-items-center">
+                    <div class="me-3">
+                      <span class="badge bg-primary rounded-pill fs-6">التصنيف:</span>
+                    </div>
+                    <h5 class="mb-0 text-danger">{{ calculateRecommendation() }}</h5>
+                  </div>
+                </c-col>
+                <c-col md="6" class="text-end">
+                  <div class="display-3 fw-bold">
+                    {{ totalSelectedPoints }}<small class="text-muted fs-4">/{{ maxPoints }}</small>
+                  </div>
+                </c-col>
+              </c-row>
+            </c-card-body>
+          </c-card>
+        </c-col>
+      </c-row>
+
+      <c-row class="mb-4">
+        <c-col>
+          <c-card class="border-0 shadow">
+            <c-card-header class="bg-light">
+              <h4 class="mb-0">التوصيات</h4>
+            </c-card-header>
+            <c-card-body>
+              <ul class="list-group list-group-flush">
+                @for(message of calculateMessages(); track message) {
+                  <li class="list-group-item d-flex">
+                    <svg [cIcon]="icons.cilChevronLeft" class="text-primary me-2" size="sm"></svg>
+                    {{ message }}
+                  </li>
+                }
+              </ul>
+            </c-card-body>
+          </c-card>
+        </c-col>
+      </c-row>
+
+      <c-row>
+        <c-col class="text-center">
+          <button
+            cButton
+            color="primary"
+            size="lg"
+            class="py-3"
+            (click)="submitRating()"
+          >
+            <svg
+              [cIcon]="icons.cilSave"
+              class="me-2"
+              size="xl"
+            ></svg>
+            حفظ التقييم
+          </button>
+        </c-col>
+      </c-row>
+    </form>
+  </c-card-body>
+</c-card>
+
+<div class="pb-5"></div>

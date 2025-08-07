@@ -1,0 +1,294 @@
+<c-smart-table
+  #smartTable="cSmartTable"
+  [columnSorter]="true"
+  [columns]="columns"
+  [items]="requests()"
+  [sorterValue]="{ column: 'name', state: 'asc' }"
+  [tableBodyProps]="{align: 'middle'}"
+  [tableFilter]="true"
+  [tableFilterLabel]="''"
+  [tableFilterPlaceholder]="'بحث ...'"
+  [tableProps]="{ hover: true, striped: true, responsive: true }"
+  cleaner
+  clickableRows
+  header
+  pagination
+>
+  <ng-template cTemplateId="tableDetails" let-item="item">
+    <div [visible]="this.details_visible[item.id]===true" cCollapse>
+      <c-card class="rounded-0">
+        <c-card-body>
+            <div>
+                <span class="text-muted mx-5">
+                    <span class="fw-bold">تاريخ الطلب: </span>
+                    {{ item['requestDate'] }}    
+                </span>
+                <span class="text-muted mx-5">
+                    <span class="fw-bolder">{{ item['type'] == 'نشاط تسويقي' ? 'تاريخ النشاط: ' :  'تاريخ التسليم: '}}</span>
+                    {{ item['typeSpecificDate'] }}
+                </span>
+            </div>
+            <p class="text-muted mt-3">
+                <span class="fw-bolder">
+                        {{ item['type'] == 'نشاط تسويقي' ? 'نوع النشاط: ':  'الدواء: '  }}
+                </span>
+                        {{ item['typeSpecificSelect'] }}
+            </p>
+          <p class="text-muted  mt-3">
+                <span class="fw-bolder">
+                    الطبيب: 
+                </span>
+                <span >
+                    {{ item['doctorName'] }}
+                </span>
+          </p>
+          <p class="text-muted  mt-3">
+                <span class="fw-bolder">
+                    {{ item['type'] == 'نشاط تسويقي' ? 'التكلفة: ' :  'الكمية: ' }}
+                </span>
+                    {{ item['typeSpecificNumber'] }}
+            </p>
+          <p class="text-muted  mt-3">
+                <span class="fw-bolder">
+                    الملاحظات: 
+                </span>
+            {{ item['notes'] ?? 'لا توجد ملاحظات ...' }}</p>
+        </c-card-body>
+        <c-card-footer>
+          @if(item['status'] !== 'تم الرفض')
+          {
+            @if(item['status'] === 'قيد الانتظار')
+            {
+                <button cButton class="ms-1 text-white" color="success" size="sm" [cModalToggle]="acceptRequestModal.id" (click)="openAcceptRejectModal(item)">
+                  قبول 
+                </button>
+            }
+            <button cButton class="ms-1 text-white" color="danger" size="sm" [cModalToggle]="rejectRequestModal.id" (click)="openAcceptRejectModal(item)">
+              رفض 
+            </button>
+            <button cButton class="ms-1 text-white" color="secondary" size="sm" [cModalToggle]="editRequestModal.id" (click)="openEditRequestModal(item)">
+              تعديل 
+            </button>
+          }
+     
+        </c-card-footer>
+      </c-card>
+    </div>
+  </ng-template>
+  <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+    <td>
+      @switch (columnName) {
+        @case ('status') {
+          <c-badge [color]="getBadge(tdContent)">
+            {{ (item[columnName]) }}
+          </c-badge>
+        }
+        @case ('show') {
+          <button (click)="toggleDetails(item.id)" cButton color="primary" size="sm" variant="outline">
+            عرض 
+          </button>
+        }
+        @default {
+          {{ tdContent }}
+        }
+      }
+    </td>
+  </ng-template>
+</c-smart-table>
+
+<c-smart-pagination
+    [activePage]="activePage()"
+    [pages]="totalPages()"
+    (activePageChange)="onPageChange($event)">
+  </c-smart-pagination>
+
+<c-modal #acceptRequestModal alignment="center" id="acceptRequestModal">
+  <c-modal-header>
+    <h5 cModalTitle>قبول طلب</h5>
+    <button [cModalToggle]="acceptRequestModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    هل انت متأكد من قبول الطلب؟
+  </c-modal-body>
+  <c-modal-footer>
+    <button cButton color="success" #close class="text-white" (click)="acceptRequest()">قبول</button>
+    <button [cModalToggle]="acceptRequestModal.id" cButton color="secondary">
+      اغلاق
+    </button>
+  </c-modal-footer>
+</c-modal>
+
+
+<c-modal #rejectRequestModal alignment="center" id="rejectRequestModal">
+  <c-modal-header>
+    <h5 cModalTitle>رفض طلب</h5>
+    <button [cModalToggle]="rejectRequestModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    هل انت متأكد من رفض الطلب؟
+  </c-modal-body>
+  <c-modal-footer>
+    <button cButton color="danger" #close class="text-white" (click)="rejectRequest()">رفض</button>
+    <button [cModalToggle]="rejectRequestModal.id" cButton color="secondary" >
+      اغلاق
+    </button>
+  </c-modal-footer>
+</c-modal>
+
+<c-modal #editRequestModal alignment="center" id="editRequestModal">
+  <c-modal-header>
+    <h5 cModalTitle>تعديل طلب</h5>
+    <button [cModalToggle]="editRequestModal.id" cButtonClose></button>
+  </c-modal-header>
+
+  <form
+    [formGroup]="editRequestForm"
+  >
+    <c-modal-body>
+     <c-row class="justify-content-between align-items-center flex-wrap">
+<c-col sm="12" md="6">
+    <span  class="d-flex align-items-center flex-shrink-0 mb-2 ">
+      <svg
+        class="me-2"
+        [cIcon]="icons.cilCalendar"
+        size="xl"
+        title="List Icon"
+      ></svg>
+      تاريخ الطلب
+    </span>
+
+    <c-date-picker
+      formControlName="requestDate"
+      size="xl"
+      placeholder="اختر التاريخ"
+      class="w-50 w-md-50"
+      [locale]="'ar'"
+      dir="rtl"
+    />
+</c-col>
+
+
+   <c-col sm="12" md="6">
+    <span  class="d-flex align-items-center flex-shrink-0 mb-2">
+      <svg
+        class="me-2"
+        [cIcon]="icons.cilCalendar"
+        size="xl"
+        title="List Icon"
+      ></svg>
+      {{ editRequestForm.get('type')?.value == 'نشاط تسويقي' ? 'تاريخ النشاط' : 'تاريخ التسليم' }}
+    </span>
+
+    <c-date-picker
+      formControlName="typeSpecificDate"
+      size="xl"
+      placeholder="اختر التاريخ"
+      class="w-50 w-md-50"
+      [locale]="'ar'"
+      dir="rtl"
+    />
+</c-col>
+
+
+
+      <c-col class="mt-4" sm="12">
+        <label cLabel>
+          <svg
+            class="me-1"
+            [cIcon]="icons.cilFile"
+            size="lg"
+            title="List Icon"
+          ></svg>
+          {{ editRequestForm.get('type')?.value == 'نشاط تسويقي' ? 'نوع النشاط' : 'الدواء' }}
+        </label>
+        <select
+          aria-label="Default select example"
+          cSelect
+          formControlName="typeSpecificSelect"
+        >
+          <option [value]="null" disabled> 
+            {{ editRequestForm.get('typeSpecificSelect')?.value ? 'اختر نوع النشاط' : 'اختر الدواء' }}
+          </option>
+          @for(sale of manageRequestsFormLookups().saleTypes ; track sale.id){
+          <option [value]="sale.id" [selected]="sale.id === editRequestForm.get('typeSpecificSelect')?.value">{{ sale.value }}</option>
+          }
+        </select>
+      </c-col>
+
+      <c-col class="mt-4" sm="12">
+        <label cLabel>
+          <svg
+            class="me-1"
+            [cIcon]="icons.cilUser"
+            size="lg"
+            title="List Icon"
+          ></svg>
+          اسم الطبيب
+        </label>
+        <select
+          aria-label="Default select example"
+          cSelect
+          formControlName="doctorName"
+        >
+          <option [value]="null" disabled>اختر الطبيب</option>
+          @for(sale of manageRequestsFormLookups().doctors ; track sale.id){
+          <option [value]="sale.id" [selected]="sale.id === editRequestForm.get('doctorName')?.value">{{ sale.value }}</option>
+          }
+        </select>
+      </c-col>
+
+      <c-col class="mt-4" sm="12">
+        <label cLabel>
+          <svg
+            class="me-1"
+            [cIcon]="icons.cilDollar"
+            size="lg"
+            title="List Icon"
+          ></svg>
+          {{ editRequestForm.get('type')?.value == 'نشاط تسويقي' ? 'التكلفة' : 'الكمية' }}
+        </label>
+        <input cFormControl value="0" type="number" formControlName="typeSpecificNumber" />
+      </c-col>
+
+      <c-col class="mt-4" sm="12">
+        <label cLabel>
+          <svg
+            class="me-1"
+            [cIcon]="icons.cilDescription"
+            size="lg"
+            title="List Icon"
+          ></svg>
+          ملاحظات
+        </label>
+        <textarea
+          formControlName="notes"
+          cFormControl
+          placeholder=" أضف أي ملاحظات إضافية هنا ..."
+          rows="3"
+        ></textarea>
+      </c-col>
+    </c-row>
+      
+    </c-modal-body>
+
+    <c-modal-footer>
+      <button
+        type="submit"
+        cButton
+        color="primary"
+        [disabled]="editRequestForm.invalid"
+        (click)="onEditRequestSubmit()"
+      >
+        تعديل
+      </button>
+      <button
+        type="button"
+        [cModalToggle]="editRequestModal.id"
+        cButton
+        color="secondary"
+      >
+        اغلاق
+      </button>
+    </c-modal-footer>
+  </form>
+</c-modal>

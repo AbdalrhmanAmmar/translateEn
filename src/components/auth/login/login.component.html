@@ -1,0 +1,99 @@
+<!-- login.component.html -->
+
+<div
+  class="login-wrapper min-vh-100 d-flex justify-content-center align-items-center"
+  style="overflow: hidden;"
+>
+  <!-- when not loading, show the form -->
+  <ng-container *ngIf="!isLoading; else loadingTpl">
+    <c-container class="w-100">
+      <c-row class="justify-content-center">
+        <c-col xs="12" sm="12" md="10" lg="8" xl="7">
+          <div class="text-center mb-4">
+            <img
+              src="../../../assets/images/logo-center.svg"
+              alt="شعار الموقع"
+              class="img-fluid"
+              style="max-width: 300px;"
+            />
+          </div>
+
+          <c-card-group>
+            <c-card class="py-4 shadow">
+              <c-card-body>
+                <form
+                  cForm
+                  #loginForm="ngForm"
+                  (ngSubmit)="onFormSubmit(loginForm)"
+                >
+                  <h1 class="fw-bold text-center">تسجيل الدخول</h1>
+                  <p class="text-body-secondary text-center">
+                    <span i18n="@@login-to-account">سجل الدخول الى حسابك</span>
+                  </p>
+
+                
+        <c-col xs="12" sm="12" md="10" lg="9" xl="8" class="m-auto">
+                  <c-input-group class="mb-3 m-auto" dir="ltr">
+                    <span cInputGroupText>
+                      <svg cIcon name="cilUser"></svg>
+                    </span>
+                    <input
+                      autoComplete="username"
+                      cFormControl
+                      [placeholder]="$localize`@@username:اسم المستخدم`"
+                      type="text"
+                      ngModel
+                      name="username"
+                      required
+                      #userNameModel="ngModel"
+                    />
+                  </c-input-group>
+          </c-col>
+                  
+
+                  <c-col xs="12" sm="12" md="10" lg="9" xl="8" class="m-auto">
+                    <c-input-group class="mb-4 m-auto" dir="ltr">
+                      <span cInputGroupText>
+                        <svg  cIcon name="cilLockLocked"></svg>
+                      </span>
+                      <input
+                        autoComplete="current-password"
+                        cFormControl
+                        [placeholder]="$localize`@@password:كلمة المرور`"
+                        type="password"
+                        ngModel
+                        name="password"
+                        required
+                        #passwordModel="ngModel"
+                      />
+                    </c-input-group>
+                  </c-col>
+                  <c-row>
+                    <c-col xs="12" class="text-center">
+                      <button
+                        cButton
+                        class="px-4"
+                        type="submit"
+                        [disabled]="!loginForm.valid || isLoading"
+                        color="primary"
+                      >
+                        <span i18n="@@login">تسجيل الدخول</span>
+                      </button>
+                    </c-col>
+                  </c-row>
+                </form>
+              </c-card-body>
+            </c-card>
+          </c-card-group>
+        </c-col>
+      </c-row>
+    </c-container>
+  </ng-container>
+
+  <!-- loading overlay -->
+  <ng-template #loadingTpl>
+     <div class="custom-spinner-overlay">
+        <c-spinner variant="grow" color="primary"/>
+    </div>
+  </ng-template>
+</div>

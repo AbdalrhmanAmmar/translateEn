@@ -1,0 +1,1448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="ar" target-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <!-- Navigation -->
+      <trans-unit id="home" datatype="html">
+        <source>الصفحة الرئيسية</source>
+        <target>Home</target>
+      </trans-unit>
+      <trans-unit id="dashboards" datatype="html">
+        <source>لوحات التحكم</source>
+        <target>Dashboards</target>
+      </trans-unit>
+      <trans-unit id="clinics-dashboard" datatype="html">
+        <source>لوحة تحكم العيادات</source>
+        <target>Clinics Dashboard</target>
+      </trans-unit>
+      <trans-unit id="pharmacies-dashboard" datatype="html">
+        <source>لوحة تحكم الصيدليات</source>
+        <target>Pharmacies Dashboard</target>
+      </trans-unit>
+      <trans-unit id="reports" datatype="html">
+        <source>التقارير</source>
+        <target>Reports</target>
+      </trans-unit>
+      <trans-unit id="clinics-report" datatype="html">
+        <source>تقرير العيادات</source>
+        <target>Clinics Report</target>
+      </trans-unit>
+      <trans-unit id="pharmacies-report" datatype="html">
+        <source>تقرير الصيدليات</source>
+        <target>Pharmacies Report</target>
+      </trans-unit>
+      <trans-unit id="visits" datatype="html">
+        <source>الزيارات</source>
+        <target>Visits</target>
+      </trans-unit>
+      <trans-unit id="add-clinic-visit" datatype="html">
+        <source>تسجيل زيارة عيادة</source>
+        <target>Add Clinic Visit</target>
+      </trans-unit>
+      <trans-unit id="add-pharmacy-visit" datatype="html">
+        <source>تسجيل زيارة صيدلية</source>
+        <target>Add Pharmacy Visit</target>
+      </trans-unit>
+      <trans-unit id="requests" datatype="html">
+        <source>الطلبات</source>
+        <target>Requests</target>
+      </trans-unit>
+      <trans-unit id="sample-request" datatype="html">
+        <source>طلب عينات</source>
+        <target>Sample Request</target>
+      </trans-unit>
+      <trans-unit id="sales-request" datatype="html">
+        <source>طلب نشاط تسويقي</source>
+        <target>Sales Activity Request</target>
+      </trans-unit>
+      <trans-unit id="manage-requests" datatype="html">
+        <source>ادارة الطلبات</source>
+        <target>Manage Requests</target>
+      </trans-unit>
+      <trans-unit id="collections" datatype="html">
+        <source>التحصيلات</source>
+        <target>Collections</target>
+      </trans-unit>
+      <trans-unit id="payment-collection" datatype="html">
+        <source>تحصيل مالي</source>
+        <target>Payment Collection</target>
+      </trans-unit>
+      <trans-unit id="order-collection" datatype="html">
+        <source>تحصيل طلب</source>
+        <target>Order Collection</target>
+      </trans-unit>
+      <trans-unit id="ratings" datatype="html">
+        <source>التقييمات</source>
+        <target>Ratings</target>
+      </trans-unit>
+      <trans-unit id="rate-visits-rep" datatype="html">
+        <source>تقييم مندوب الزيارات</source>
+        <target>Rate Visits Representative</target>
+      </trans-unit>
+      <trans-unit id="general-management" datatype="html">
+        <source>الادارة العامة</source>
+        <target>General Management</target>
+      </trans-unit>
+      <trans-unit id="work-days-management" datatype="html">
+        <source>ادارة ايام العمل</source>
+        <target>Work Days Management</target>
+      </trans-unit>
+      <trans-unit id="sheets-management" datatype="html">
+        <source>ادارة المستندات</source>
+        <target>Sheets Management</target>
+      </trans-unit>
+      <trans-unit id="lost-orders-management" datatype="html">
+        <source>ادارة الطلبيات المفقودة</source>
+        <target>Lost Orders Management</target>
+      </trans-unit>
+      <trans-unit id="user-management" datatype="html">
+        <source>ادارة المستخدميين</source>
+        <target>User Management</target>
+      </trans-unit>
+      <trans-unit id="add-user" datatype="html">
+        <source>اضافة مستخدم</source>
+        <target>Add User</target>
+      </trans-unit>
+
+      <!-- Login Page -->
+      <trans-unit id="login" datatype="html">
+        <source>تسجيل الدخول</source>
+        <target>Login</target>
+      </trans-unit>
+      <trans-unit id="login-to-account" datatype="html">
+        <source>سجل الدخول الى حسابك</source>
+        <target>Login to your account</target>
+      </trans-unit>
+      <trans-unit id="username" datatype="html">
+        <source>اسم المستخدم</source>
+        <target>Username</target>
+      </trans-unit>
+      <trans-unit id="password" datatype="html">
+        <source>كلمة المرور</source>
+        <target>Password</target>
+      </trans-unit>
+
+      <!-- Common Terms -->
+      <trans-unit id="save" datatype="html">
+        <source>حفظ</source>
+        <target>Save</target>
+      </trans-unit>
+      <trans-unit id="cancel" datatype="html">
+        <source>إلغاء</source>
+        <target>Cancel</target>
+      </trans-unit>
+      <trans-unit id="close" datatype="html">
+        <source>إغلاق</source>
+        <target>Close</target>
+      </trans-unit>
+      <trans-unit id="edit" datatype="html">
+        <source>تعديل</source>
+        <target>Edit</target>
+      </trans-unit>
+      <trans-unit id="delete" datatype="html">
+        <source>حذف</source>
+        <target>Delete</target>
+      </trans-unit>
+      <trans-unit id="search" datatype="html">
+        <source>بحث</source>
+        <target>Search</target>
+      </trans-unit>
+      <trans-unit id="loading" datatype="html">
+        <source>جاري التحميل...</source>
+        <target>Loading...</target>
+      </trans-unit>
+      <trans-unit id="no-data" datatype="html">
+        <source>لا توجد بيانات</source>
+        <target>No data available</target>
+      </trans-unit>
+
+      <!-- Header -->
+      <trans-unit id="settings" datatype="html">
+        <source>الاعدادات</source>
+        <target>Settings</target>
+      </trans-unit>
+      <trans-unit id="account" datatype="html">
+        <source>الحساب</source>
+        <target>Account</target>
+      </trans-unit>
+      <trans-unit id="logout" datatype="html">
+        <source>تسجيل الخروج</source>
+        <target>Logout</target>
+      </trans-unit>
+      <trans-unit id="notifications-count" datatype="html">
+        <source>لديك {count} اشعارات</source>
+        <target>You have {count} notifications</target>
+      </trans-unit>
+      <trans-unit id="test-notification" datatype="html">
+        <source>اشعار تجريبي</source>
+        <target>Test notification</target>
+      </trans-unit>
+      <trans-unit id="activities-count" datatype="html">
+        <source>لديك {count} انشطة</source>
+        <target>You have {count} activities</target>
+      </trans-unit>
+      <trans-unit id="current-time" datatype="html">
+        <source>التوقيت الحالي</source>
+        <target>Current Time</target>
+      </trans-unit>
+      <trans-unit id="session-time" datatype="html">
+        <source>توقيت الجلسة</source>
+        <target>Session Time</target>
+      </trans-unit>
+
+      <!-- User Management -->
+      <trans-unit id="full-name" datatype="html">
+        <source>الاسم الكامل</source>
+        <target>Full Name</target>
+      </trans-unit>
+      <trans-unit id="enter-full-name" datatype="html">
+        <source>أدخل الاسم الكامل</source>
+        <target>Enter full name</target>
+      </trans-unit>
+      <trans-unit id="enter-username" datatype="html">
+        <source>أدخل اسم المستخدم</source>
+        <target>Enter username</target>
+      </trans-unit>
+      <trans-unit id="email" datatype="html">
+        <source>البريد الإلكتروني</source>
+        <target>Email</target>
+      </trans-unit>
+      <trans-unit id="enter-email" datatype="html">
+        <source>أدخل البريد الإلكتروني</source>
+        <target>Enter email</target>
+      </trans-unit>
+      <trans-unit id="phone" datatype="html">
+        <source>رقم الهاتف</source>
+        <target>Phone Number</target>
+      </trans-unit>
+      <trans-unit id="enter-phone" datatype="html">
+        <source>أدخل رقم الهاتف</source>
+        <target>Enter phone number</target>
+      </trans-unit>
+      <trans-unit id="enter-password" datatype="html">
+        <source>أدخل كلمة المرور</source>
+        <target>Enter password</target>
+      </trans-unit>
+      <trans-unit id="confirm-password" datatype="html">
+        <source>تأكيد كلمة المرور</source>
+        <target>Confirm Password</target>
+      </trans-unit>
+      <trans-unit id="enter-confirm-password" datatype="html">
+        <source>أدخل تأكيد كلمة المرور</source>
+        <target>Enter password confirmation</target>
+      </trans-unit>
+      <trans-unit id="user-role" datatype="html">
+        <source>صلاحية المستخدم</source>
+        <target>User Role</target>
+      </trans-unit>
+      <trans-unit id="select-user-role" datatype="html">
+        <source>اختر صلاحية المستخدم</source>
+        <target>Select user role</target>
+      </trans-unit>
+      <trans-unit id="med-rep" datatype="html">
+        <source>مندوب اعلانات</source>
+        <target>Medical Representative</target>
+      </trans-unit>
+      <trans-unit id="med-sup" datatype="html">
+        <source>مشرف اعلانات</source>
+        <target>Medical Supervisor</target>
+      </trans-unit>
+      <trans-unit id="sales-rep" datatype="html">
+        <source>مندوب مبيعات</source>
+        <target>Sales Representative</target>
+      </trans-unit>
+      <trans-unit id="sales-sup" datatype="html">
+        <source>مشرف مبيعات</source>
+        <target>Sales Supervisor</target>
+      </trans-unit>
+      <trans-unit id="orders-officer" datatype="html">
+        <source>محصل طلبات</source>
+        <target>Orders Officer</target>
+      </trans-unit>
+      <trans-unit id="financial-officer" datatype="html">
+        <source>محصل مدفوعات</source>
+        <target>Financial Officer</target>
+      </trans-unit>
+      <trans-unit id="financial-manager" datatype="html">
+        <source>مدير مالي</source>
+        <target>Financial Manager</target>
+      </trans-unit>
+      <trans-unit id="general-manager" datatype="html">
+        <source>مدير عام</source>
+        <target>General Manager</target>
+      </trans-unit>
+      <trans-unit id="assistant" datatype="html">
+        <source>مساعد</source>
+        <target>Assistant</target>
+      </trans-unit>
+      <trans-unit id="admin" datatype="html">
+        <source>مسئول</source>
+        <target>Administrator</target>
+      </trans-unit>
+
+      <!-- Forms -->
+      <trans-unit id="visit-date" datatype="html">
+        <source>تاريخ الزيارة</source>
+        <target>Visit Date</target>
+      </trans-unit>
+      <trans-unit id="choose-date" datatype="html">
+        <source>اختر التاريخ</source>
+        <target>Choose Date</target>
+      </trans-unit>
+      <trans-unit id="doctor-name" datatype="html">
+        <source>اسم الطبيب</source>
+        <target>Doctor Name</target>
+      </trans-unit>
+      <trans-unit id="choose-doctor" datatype="html">
+        <source>اختر الطبيب</source>
+        <target>Choose Doctor</target>
+      </trans-unit>
+      <trans-unit id="clinic-name" datatype="html">
+        <source>اسم العيادة</source>
+        <target>Clinic Name</target>
+      </trans-unit>
+      <trans-unit id="choose-clinic" datatype="html">
+        <source>اختر العيادة</source>
+        <target>Choose Clinic</target>
+      </trans-unit>
+      <trans-unit id="medicine" datatype="html">
+        <source>الدواء</source>
+        <target>Medicine</target>
+      </trans-unit>
+      <trans-unit id="choose-medicine" datatype="html">
+        <source>اختر الدواء</source>
+        <target>Choose Medicine</target>
+      </trans-unit>
+      <trans-unit id="message" datatype="html">
+        <source>الرسالة</source>
+        <target>Message</target>
+      </trans-unit>
+      <trans-unit id="choose-message" datatype="html">
+        <source>اختر الرسالة</source>
+        <target>Choose Message</target>
+      </trans-unit>
+      <trans-unit id="samples-count" datatype="html">
+        <source>عدد العينات</source>
+        <target>Samples Count</target>
+      </trans-unit>
+      <trans-unit id="notes" datatype="html">
+        <source>ملاحظات</source>
+        <target>Notes</target>
+      </trans-unit>
+      <trans-unit id="add-notes-placeholder" datatype="html">
+        <source>أضف أي ملاحظات إضافية هنا ...</source>
+        <target>Add any additional notes here...</target>
+      </trans-unit>
+      <trans-unit id="register-visit" datatype="html">
+        <source>تسجيل زيارة</source>
+        <target>Register Visit</target>
+      </trans-unit>
+      <trans-unit id="with-supervisor" datatype="html">
+        <source>هل كانت الزيارة بصحبة مشرف ؟</source>
+        <target>Was the visit with a supervisor?</target>
+      </trans-unit>
+      <trans-unit id="add-another-product" datatype="html">
+        <source>+ منتج آخر</source>
+        <target>+ Another Product</target>
+      </trans-unit>
+      <trans-unit id="remove-product" datatype="html">
+        <source>- حذف المنتج</source>
+        <target>- Remove Product</target>
+      </trans-unit>
+
+      <!-- Requests -->
+      <trans-unit id="request-date" datatype="html">
+        <source>تاريخ الطلب</source>
+        <target>Request Date</target>
+      </trans-unit>
+      <trans-unit id="activity-date" datatype="html">
+        <source>تاريخ النشاط</source>
+        <target>Activity Date</target>
+      </trans-unit>
+      <trans-unit id="delivery-date" datatype="html">
+        <source>تاريخ التسليم</source>
+        <target>Delivery Date</target>
+      </trans-unit>
+      <trans-unit id="activity-type" datatype="html">
+        <source>نوع النشاط</source>
+        <target>Activity Type</target>
+      </trans-unit>
+      <trans-unit id="choose-activity-type" datatype="html">
+        <source>اختر نوع النشاط</source>
+        <target>Choose Activity Type</target>
+      </trans-unit>
+      <trans-unit id="cost" datatype="html">
+        <source>التكلفة</source>
+        <target>Cost</target>
+      </trans-unit>
+      <trans-unit id="quantity" datatype="html">
+        <source>الكمية</source>
+        <target>Quantity</target>
+      </trans-unit>
+      <trans-unit id="register-activity" datatype="html">
+        <source>تسجيل النشاط</source>
+        <target>Register Activity</target>
+      </trans-unit>
+      <trans-unit id="register-request" datatype="html">
+        <source>تسجيل الطلب</source>
+        <target>Register Request</target>
+      </trans-unit>
+
+      <!-- Manage Requests -->
+      <trans-unit id="representative" datatype="html">
+        <source>المندوب</source>
+        <target>Representative</target>
+      </trans-unit>
+      <trans-unit id="date" datatype="html">
+        <source>التاريخ</source>
+        <target>Date</target>
+      </trans-unit>
+      <trans-unit id="type" datatype="html">
+        <source>النوع</source>
+        <target>Type</target>
+      </trans-unit>
+      <trans-unit id="status" datatype="html">
+        <source>الحالة</source>
+        <target>Status</target>
+      </trans-unit>
+      <trans-unit id="view" datatype="html">
+        <source>عرض</source>
+        <target>View</target>
+      </trans-unit>
+      <trans-unit id="accept" datatype="html">
+        <source>قبول</source>
+        <target>Accept</target>
+      </trans-unit>
+      <trans-unit id="reject" datatype="html">
+        <source>رفض</source>
+        <target>Reject</target>
+      </trans-unit>
+      <trans-unit id="accept-request" datatype="html">
+        <source>قبول طلب</source>
+        <target>Accept Request</target>
+      </trans-unit>
+      <trans-unit id="reject-request" datatype="html">
+        <source>رفض طلب</source>
+        <target>Reject Request</target>
+      </trans-unit>
+      <trans-unit id="edit-request" datatype="html">
+        <source>تعديل طلب</source>
+        <target>Edit Request</target>
+      </trans-unit>
+      <trans-unit id="confirm-accept" datatype="html">
+        <source>هل انت متأكد من قبول الطلب؟</source>
+        <target>Are you sure you want to accept the request?</target>
+      </trans-unit>
+      <trans-unit id="confirm-reject" datatype="html">
+        <source>هل انت متأكد من رفض الطلب؟</source>
+        <target>Are you sure you want to reject the request?</target>
+      </trans-unit>
+      <trans-unit id="no-notes" datatype="html">
+        <source>لا توجد ملاحظات ...</source>
+        <target>No notes available...</target>
+      </trans-unit>
+
+      <!-- Collections -->
+      <trans-unit id="financial-collections" datatype="html">
+        <source>التحصيلات المالية</source>
+        <target>Financial Collections</target>
+      </trans-unit>
+      <trans-unit id="pharmacy-orders" datatype="html">
+        <source>طلبيات الصيدليات</source>
+        <target>Pharmacy Orders</target>
+      </trans-unit>
+      <trans-unit id="order-collector" datatype="html">
+        <source>محصل الطلبيات</source>
+        <target>Order Collector</target>
+      </trans-unit>
+      <trans-unit id="choose-status" datatype="html">
+        <source>اختر الحالة</source>
+        <target>Choose Status</target>
+      </trans-unit>
+      <trans-unit id="select-all" datatype="html">
+        <source>تحديد الكل</source>
+        <target>Select All</target>
+      </trans-unit>
+      <trans-unit id="pending" datatype="html">
+        <source>قيد الانتظار</source>
+        <target>Pending</target>
+      </trans-unit>
+      <trans-unit id="approved" datatype="html">
+        <source>تم الموافقة</source>
+        <target>Approved</target>
+      </trans-unit>
+      <trans-unit id="rejected" datatype="html">
+        <source>تم الرفض</source>
+        <target>Rejected</target>
+      </trans-unit>
+      <trans-unit id="pharmacy" datatype="html">
+        <source>الصيدلية</source>
+        <target>Pharmacy</target>
+      </trans-unit>
+      <trans-unit id="amount" datatype="html">
+        <source>المبلغ</source>
+        <target>Amount</target>
+      </trans-unit>
+      <trans-unit id="receipt-number" datatype="html">
+        <source>رقم الإيصال</source>
+        <target>Receipt Number</target>
+      </trans-unit>
+      <trans-unit id="procedures" datatype="html">
+        <source>الإجراءات</source>
+        <target>Procedures</target>
+      </trans-unit>
+      <trans-unit id="items-count" datatype="html">
+        <source>{count} أصناف</source>
+        <target>{count} items</target>
+      </trans-unit>
+      <trans-unit id="total" datatype="html">
+        <source>الاجمالي</source>
+        <target>Total</target>
+      </trans-unit>
+      <trans-unit id="libyan-dinar" datatype="html">
+        <source>دينار ليبي</source>
+        <target>Libyan Dinar</target>
+      </trans-unit>
+      <trans-unit id="approve-collection" datatype="html">
+        <source>الموافقة على التحصيل ؟</source>
+        <target>Approve Collection?</target>
+      </trans-unit>
+      <trans-unit id="reject-collection" datatype="html">
+        <source>رفض التحصيل ؟</source>
+        <target>Reject Collection?</target>
+      </trans-unit>
+      <trans-unit id="approve-order" datatype="html">
+        <source>الموافقة على الطلب ؟</source>
+        <target>Approve Order?</target>
+      </trans-unit>
+      <trans-unit id="reject-order" datatype="html">
+        <source>رفض الطلب ؟</source>
+        <target>Reject Order?</target>
+      </trans-unit>
+      <trans-unit id="confirm-approve-collection" datatype="html">
+        <source>بعد الموافقة على التحصيل لن يمكنك التراجع عن ذلك، هل أنت متأكد؟</source>
+        <target>After approving the collection, you cannot undo it. Are you sure?</target>
+      </trans-unit>
+      <trans-unit id="confirm-reject-collection" datatype="html">
+        <source>بعد رفض التحصيل لن يمكنك التراجع عن ذلك، هل أنت متأكد؟</source>
+        <target>After rejecting the collection, you cannot undo it. Are you sure?</target>
+      </trans-unit>
+      <trans-unit id="confirm-approve-order" datatype="html">
+        <source>بعد الموافقة على الطلب لن يمكنك التراجع عن ذلك، هل أنت متأكد؟</source>
+        <target>After approving the order, you cannot undo it. Are you sure?</target>
+      </trans-unit>
+      <trans-unit id="confirm-reject-order" datatype="html">
+        <source>بعد رفض الطلب لن يمكنك التراجع عن ذلك، هل أنت متأكد؟</source>
+        <target>After rejecting the order, you cannot undo it. Are you sure?</target>
+      </trans-unit>
+      <trans-unit id="approve-collection-btn" datatype="html">
+        <source>الموافقة على التحصيل</source>
+        <target>Approve Collection</target>
+      </trans-unit>
+      <trans-unit id="reject-collection-btn" datatype="html">
+        <source>رفض التحصيل</source>
+        <target>Reject Collection</target>
+      </trans-unit>
+      <trans-unit id="approve-order-btn" datatype="html">
+        <source>الموافقة على الطلب</source>
+        <target>Approve Order</target>
+      </trans-unit>
+      <trans-unit id="reject-order-btn" datatype="html">
+        <source>رفض الطلب</source>
+        <target>Reject Order</target>
+      </trans-unit>
+      <trans-unit id="cancel-operation" datatype="html">
+        <source>الغاء العملية</source>
+        <target>Cancel Operation</target>
+      </trans-unit>
+      <trans-unit id="no-collections" datatype="html">
+        <source>لا توجد تحصيلات مالية لعرضها</source>
+        <target>No financial collections to display</target>
+      </trans-unit>
+      <trans-unit id="no-orders" datatype="html">
+        <source>لا توجد طلبيات لعرضها</source>
+        <target>No orders to display</target>
+      </trans-unit>
+      <trans-unit id="print" datatype="html">
+        <source>طباعة</source>
+        <target>Print</target>
+      </trans-unit>
+
+      <!-- Pharmacy Visit -->
+      <trans-unit id="pharmacy-name" datatype="html">
+        <source>اسم الصيدلية</source>
+        <target>Pharmacy Name</target>
+      </trans-unit>
+      <trans-unit id="choose-pharmacy" datatype="html">
+        <source>اختر الصيدلية</source>
+        <target>Choose Pharmacy</target>
+      </trans-unit>
+      <trans-unit id="visit-type" datatype="html">
+        <source>نوع الزيارة</source>
+        <target>Visit Type</target>
+      </trans-unit>
+      <trans-unit id="draft-distribution" datatype="html">
+        <source>توزيع درافت</source>
+        <target>Draft Distribution</target>
+      </trans-unit>
+      <trans-unit id="introductory-visit" datatype="html">
+        <source>زيارة تعريفية</source>
+        <target>Introductory Visit</target>
+      </trans-unit>
+      <trans-unit id="order" datatype="html">
+        <source>طلبية</source>
+        <target>Order</target>
+      </trans-unit>
+      <trans-unit id="collection" datatype="html">
+        <source>تحصيل</source>
+        <target>Collection</target>
+      </trans-unit>
+      <trans-unit id="yes" datatype="html">
+        <source>نعم</source>
+        <target>Yes</target>
+      </trans-unit>
+      <trans-unit id="no" datatype="html">
+        <source>لا</source>
+        <target>No</target>
+      </trans-unit>
+      <trans-unit id="introductory-visit-data" datatype="html">
+        <source>بيانات الزيارة التعريفية</source>
+        <target>Introductory Visit Data</target>
+      </trans-unit>
+      <trans-unit id="visit-notes" datatype="html">
+        <source>ملاحظات الزيارة</source>
+        <target>Visit Notes</target>
+      </trans-unit>
+      <trans-unit id="enter-intro-notes" datatype="html">
+        <source>أدخل ملاحظات الزيارة التعريفية</source>
+        <target>Enter introductory visit notes</target>
+      </trans-unit>
+      <trans-unit id="visit-image" datatype="html">
+        <source>صورة الزيارة</source>
+        <target>Visit Image</target>
+      </trans-unit>
+      <trans-unit id="upload-visit-image" datatype="html">
+        <source>يرجى رفع صورة توثق الزيارة التعريفية (JPG, PNG)</source>
+        <target>Please upload an image documenting the introductory visit (JPG, PNG)</target>
+      </trans-unit>
+      <trans-unit id="collection-data" datatype="html">
+        <source>بيانات التحصيل</source>
+        <target>Collection Data</target>
+      </trans-unit>
+      <trans-unit id="total-amount" datatype="html">
+        <source>المبلغ الكلي</source>
+        <target>Total Amount</target>
+      </trans-unit>
+      <trans-unit id="receipt-image" datatype="html">
+        <source>صورة الوصل</source>
+        <target>Receipt Image</target>
+      </trans-unit>
+      <trans-unit id="upload-receipt-image" datatype="html">
+        <source>يرجى رفع صورة واضحة للوصل (JPG, PNG)</source>
+        <target>Please upload a clear image of the receipt (JPG, PNG)</target>
+      </trans-unit>
+      <trans-unit id="order-products" datatype="html">
+        <source>منتجات الطلبية</source>
+        <target>Order Products</target>
+      </trans-unit>
+      <trans-unit id="product" datatype="html">
+        <source>المنتج</source>
+        <target>Product</target>
+      </trans-unit>
+      <trans-unit id="price" datatype="html">
+        <source>السعر</source>
+        <target>Price</target>
+      </trans-unit>
+      <trans-unit id="no-products-available" datatype="html">
+        <source>لا توجد منتجات متاحة</source>
+        <target>No products available</target>
+      </trans-unit>
+      <trans-unit id="order-total" datatype="html">
+        <source>المجموع الكلي للطلبية</source>
+        <target>Order Total</target>
+      </trans-unit>
+
+      <!-- Reports -->
+      <trans-unit id="from" datatype="html">
+        <source>من</source>
+        <target>From</target>
+      </trans-unit>
+      <trans-unit id="to" datatype="html">
+        <source>إلى</source>
+        <target>To</target>
+      </trans-unit>
+      <trans-unit id="doctors-info" datatype="html">
+        <source>معلومات الأطباء</source>
+        <target>Doctors Information</target>
+      </trans-unit>
+      <trans-unit id="total-doctors" datatype="html">
+        <source>عدد الأطباء الكلي</source>
+        <target>Total Doctors Count</target>
+      </trans-unit>
+      <trans-unit id="doctors-without-visits" datatype="html">
+        <source>أطباء بدون زيارات</source>
+        <target>Doctors Without Visits</target>
+      </trans-unit>
+      <trans-unit id="doctors-coverage" datatype="html">
+        <source>نسبة تغطية الأطباء</source>
+        <target>Doctors Coverage Rate</target>
+      </trans-unit>
+      <trans-unit id="goals-achievement" datatype="html">
+        <source>الأهداف والإنجاز</source>
+        <target>Goals & Achievement</target>
+      </trans-unit>
+      <trans-unit id="target-visits" datatype="html">
+        <source>الزيارات المستهدفة</source>
+        <target>Target Visits</target>
+      </trans-unit>
+      <trans-unit id="completed-visits" datatype="html">
+        <source>الزيارات المحققة</source>
+        <target>Completed Visits</target>
+      </trans-unit>
+      <trans-unit id="achievement-rate" datatype="html">
+        <source>نسبة الإنجاز</source>
+        <target>Achievement Rate</target>
+      </trans-unit>
+      <trans-unit id="visit-rates" datatype="html">
+        <source>معدلات الزيارات</source>
+        <target>Visit Rates</target>
+      </trans-unit>
+      <trans-unit id="daily-target-rate" datatype="html">
+        <source>المعدل اليومي المستهدف</source>
+        <target>Daily Target Rate</target>
+      </trans-unit>
+      <trans-unit id="daily-actual-rate" datatype="html">
+        <source>المعدل اليومي الفعلي</source>
+        <target>Daily Actual Rate</target>
+      </trans-unit>
+      <trans-unit id="missed-visits" datatype="html">
+        <source>الزيارات الغير محققة</source>
+        <target>Missed Visits</target>
+      </trans-unit>
+      <trans-unit id="work-days" datatype="html">
+        <source>أيام العمل</source>
+        <target>Work Days</target>
+      </trans-unit>
+      <trans-unit id="expected-work-days" datatype="html">
+        <source>أيام العمل المتوقعة</source>
+        <target>Expected Work Days</target>
+      </trans-unit>
+      <trans-unit id="completed-work-days" datatype="html">
+        <source>أيام العمل المحققة</source>
+        <target>Completed Work Days</target>
+      </trans-unit>
+      <trans-unit id="days-without-reports" datatype="html">
+        <source>أيام بدون تقرير</source>
+        <target>Days Without Reports</target>
+      </trans-unit>
+      <trans-unit id="visit-classification" datatype="html">
+        <source>تصنيف الزيارات</source>
+        <target>Visit Classification</target>
+      </trans-unit>
+      <trans-unit id="class-a-visits" datatype="html">
+        <source>زيارات الفئة A</source>
+        <target>Class A Visits</target>
+      </trans-unit>
+      <trans-unit id="class-b-visits" datatype="html">
+        <source>زيارات الفئة B</source>
+        <target>Class B Visits</target>
+      </trans-unit>
+      <trans-unit id="total-visits" datatype="html">
+        <source>إجمالي الزيارات</source>
+        <target>Total Visits</target>
+      </trans-unit>
+      <trans-unit id="doctors-reports" datatype="html">
+        <source>تقارير الاطباء</source>
+        <target>Doctors Reports</target>
+      </trans-unit>
+      <trans-unit id="doctors-without-visits-report" datatype="html">
+        <source>تقرير الاطباء بدون زيارات</source>
+        <target>Doctors Without Visits Report</target>
+      </trans-unit>
+      <trans-unit id="doctor" datatype="html">
+        <source>الدكتور</source>
+        <target>Doctor</target>
+      </trans-unit>
+      <trans-unit id="organization" datatype="html">
+        <source>الجهة</source>
+        <target>Organization</target>
+      </trans-unit>
+      <trans-unit id="city" datatype="html">
+        <source>المدينة</source>
+        <target>City</target>
+      </trans-unit>
+      <trans-unit id="area" datatype="html">
+        <source>المنطقة</source>
+        <target>Area</target>
+      </trans-unit>
+      <trans-unit id="district" datatype="html">
+        <source>الحي</source>
+        <target>District</target>
+      </trans-unit>
+      <trans-unit id="goals-achievement-reports" datatype="html">
+        <source>تقارير الاهداف والانجازات</source>
+        <target>Goals & Achievement Reports</target>
+      </trans-unit>
+      <trans-unit id="completed-visits-report" datatype="html">
+        <source>تقرير الزيارات المحققة</source>
+        <target>Completed Visits Report</target>
+      </trans-unit>
+      <trans-unit id="work-days-reports" datatype="html">
+        <source>تقارير ايام العمل</source>
+        <target>Work Days Reports</target>
+      </trans-unit>
+      <trans-unit id="days-without-reports-report" datatype="html">
+        <source>تقرير الايام بدون تقارير</source>
+        <target>Days Without Reports Report</target>
+      </trans-unit>
+      <trans-unit id="day" datatype="html">
+        <source>اليوم</source>
+        <target>Day</target>
+      </trans-unit>
+      <trans-unit id="visit-classification-reports" datatype="html">
+        <source>تقارير تصنيف الزيارات</source>
+        <target>Visit Classification Reports</target>
+      </trans-unit>
+      <trans-unit id="class-a-visits-report" datatype="html">
+        <source>تقرير زيارات الفئة A</source>
+        <target>Class A Visits Report</target>
+      </trans-unit>
+      <trans-unit id="class-b-visits-report" datatype="html">
+        <source>تقرير زيارات الفئة B</source>
+        <target>Class B Visits Report</target>
+      </trans-unit>
+      <trans-unit id="visit-rates-reports" datatype="html">
+        <source>تقارير معدلات الزيارة</source>
+        <target>Visit Rates Reports</target>
+      </trans-unit>
+      <trans-unit id="missed-visits-report" datatype="html">
+        <source>تقرير الزيارات الغير محققة</source>
+        <target>Missed Visits Report</target>
+      </trans-unit>
+      <trans-unit id="completed-work-days-report" datatype="html">
+        <source>تقرير ايام العمل المحققة</source>
+        <target>Completed Work Days Report</target>
+      </trans-unit>
+
+      <!-- Dashboard -->
+      <trans-unit id="from-date" datatype="html">
+        <source>من تاريخ</source>
+        <target>From Date</target>
+      </trans-unit>
+      <trans-unit id="to-date" datatype="html">
+        <source>إلى تاريخ</source>
+        <target>To Date</target>
+      </trans-unit>
+      <trans-unit id="choose-doctor" datatype="html">
+        <source>اختر الطبيب</source>
+        <target>Choose Doctor</target>
+      </trans-unit>
+      <trans-unit id="all" datatype="html">
+        <source>الكل</source>
+        <target>All</target>
+      </trans-unit>
+      <trans-unit id="specialization" datatype="html">
+        <source>التخصص</source>
+        <target>Specialization</target>
+      </trans-unit>
+      <trans-unit id="classification" datatype="html">
+        <source>التصنيف</source>
+        <target>Classification</target>
+      </trans-unit>
+      <trans-unit id="brand" datatype="html">
+        <source>العلامة التجارية</source>
+        <target>Brand</target>
+      </trans-unit>
+      <trans-unit id="choose-clinic" datatype="html">
+        <source>اختر العيادة</source>
+        <target>Choose Clinic</target>
+      </trans-unit>
+      <trans-unit id="first-product" datatype="html">
+        <source>المنتج الأول</source>
+        <target>First Product</target>
+      </trans-unit>
+      <trans-unit id="second-product" datatype="html">
+        <source>المنتج الثاني</source>
+        <target>Second Product</target>
+      </trans-unit>
+      <trans-unit id="third-product" datatype="html">
+        <source>المنتج الثالث</source>
+        <target>Third Product</target>
+      </trans-unit>
+      <trans-unit id="representative-filter" datatype="html">
+        <source>المندوب</source>
+        <target>Representative</target>
+      </trans-unit>
+      <trans-unit id="reset" datatype="html">
+        <source>إعادة ظبط</source>
+        <target>Reset</target>
+      </trans-unit>
+      <trans-unit id="visits-list" datatype="html">
+        <source>قائمة الزيارات</source>
+        <target>Visits List</target>
+      </trans-unit>
+      <trans-unit id="time" datatype="html">
+        <source>الوقت</source>
+        <target>Time</target>
+      </trans-unit>
+      <trans-unit id="clinic" datatype="html">
+        <source>العيادة</source>
+        <target>Clinic</target>
+      </trans-unit>
+      <trans-unit id="segment" datatype="html">
+        <source>التصنيف</source>
+        <target>Segment</target>
+      </trans-unit>
+      <trans-unit id="specialization-short" datatype="html">
+        <source>التخصص</source>
+        <target>Specialization</target>
+      </trans-unit>
+      <trans-unit id="view-visit" datatype="html">
+        <source>عرض الزيارة</source>
+        <target>View Visit</target>
+      </trans-unit>
+      <trans-unit id="view-doctor" datatype="html">
+        <source>عرض الطبيب</source>
+        <target>View Doctor</target>
+      </trans-unit>
+      <trans-unit id="search-here" datatype="html">
+        <source>ابحث هنا...</source>
+        <target>Search here...</target>
+      </trans-unit>
+      <trans-unit id="search-by-value" datatype="html">
+        <source>البحث بقيمة</source>
+        <target>Search by value</target>
+      </trans-unit>
+      <trans-unit id="no-visits-to-show" datatype="html">
+        <source>لا توجد زيارات لعرضها</source>
+        <target>No visits to display</target>
+      </trans-unit>
+      <trans-unit id="visit-details" datatype="html">
+        <source>تفاصيل الزيارة</source>
+        <target>Visit Details</target>
+      </trans-unit>
+      <trans-unit id="medical-visit-record" datatype="html">
+        <source>سجل الزيارة الطبية</source>
+        <target>Medical Visit Record</target>
+      </trans-unit>
+      <trans-unit id="visit-info" datatype="html">
+        <source>معلومات الزيارة</source>
+        <target>Visit Information</target>
+      </trans-unit>
+      <trans-unit id="address" datatype="html">
+        <source>العنوان</source>
+        <target>Address</target>
+      </trans-unit>
+      <trans-unit id="products-samples" datatype="html">
+        <source>المنتجات والعينات</source>
+        <target>Products & Samples</target>
+      </trans-unit>
+      <trans-unit id="samples" datatype="html">
+        <source>العينات</source>
+        <target>Samples</target>
+      </trans-unit>
+      <trans-unit id="medical-id-card" datatype="html">
+        <source>بطاقة التعريف الطبية</source>
+        <target>Medical ID Card</target>
+      </trans-unit>
+      <trans-unit id="doctor-info" datatype="html">
+        <source>معلومات الطبيب</source>
+        <target>Doctor Information</target>
+      </trans-unit>
+      <trans-unit id="name" datatype="html">
+        <source>الاسم</source>
+        <target>Name</target>
+      </trans-unit>
+      <trans-unit id="job" datatype="html">
+        <source>الوظيفة</source>
+        <target>Job</target>
+      </trans-unit>
+      <trans-unit id="organization-type" datatype="html">
+        <source>نوع الجهة</source>
+        <target>Organization Type</target>
+      </trans-unit>
+      <trans-unit id="category" datatype="html">
+        <source>الفئة</source>
+        <target>Category</target>
+      </trans-unit>
+      <trans-unit id="target-visits-count" datatype="html">
+        <source>عدد الزيارات المستهدفة</source>
+        <target>Target Visits Count</target>
+      </trans-unit>
+      <trans-unit id="decision-maker" datatype="html">
+        <source>مسئول قرار</source>
+        <target>Decision Maker</target>
+      </trans-unit>
+      <trans-unit id="phone-number" datatype="html">
+        <source>رقم الهاتف</source>
+        <target>Phone Number</target>
+      </trans-unit>
+      <trans-unit id="total-visits-count" datatype="html">
+        <source>اجمالي الزيارات</source>
+        <target>Total Visits</target>
+      </trans-unit>
+      <trans-unit id="total-samples-count" datatype="html">
+        <source>اجمالي العينات</source>
+        <target>Total Samples</target>
+      </trans-unit>
+      <trans-unit id="total-sales-requests" datatype="html">
+        <source>اجمالي طلبات المبيعات</source>
+        <target>Total Sales Requests</target>
+      </trans-unit>
+      <trans-unit id="total-samples-requests" datatype="html">
+        <source>اجمالي طلبات العينات</source>
+        <target>Total Sample Requests</target>
+      </trans-unit>
+      <trans-unit id="samples-requests-record" datatype="html">
+        <source>سجل طلبات العينات المقدمة</source>
+        <target>Sample Requests Record</target>
+      </trans-unit>
+      <trans-unit id="total-sales-requests-title" datatype="html">
+        <source>اجمالي طلبات المبيعات</source>
+        <target>Total Sales Requests</target>
+      </trans-unit>
+      <trans-unit id="sales-requests-record" datatype="html">
+        <source>سجل طلبات المبيعات المقدمة</source>
+        <target>Sales Requests Record</target>
+      </trans-unit>
+      <trans-unit id="request-date-short" datatype="html">
+        <source>تاريخ الطلب</source>
+        <target>Request Date</target>
+      </trans-unit>
+      <trans-unit id="delivery-date-short" datatype="html">
+        <source>تاريخ التسليم</source>
+        <target>Delivery Date</target>
+      </trans-unit>
+      <trans-unit id="activity-date-short" datatype="html">
+        <source>تاريخ النشاط</source>
+        <target>Activity Date</target>
+      </trans-unit>
+      <trans-unit id="activity" datatype="html">
+        <source>النشاط</source>
+        <target>Activity</target>
+      </trans-unit>
+      <trans-unit id="total-visits-title" datatype="html">
+        <source>اجمالي الزيارات</source>
+        <target>Total Visits</target>
+      </trans-unit>
+      <trans-unit id="visits-record" datatype="html">
+        <source>سجل الزيارات المسجلة</source>
+        <target>Registered Visits Record</target>
+      </trans-unit>
+      <trans-unit id="visit-date-short" datatype="html">
+        <source>تاريخ الزيارة</source>
+        <target>Visit Date</target>
+      </trans-unit>
+      <trans-unit id="no-data-to-show" datatype="html">
+        <source>لا توجد بيانات لعرضها</source>
+        <target>No data to display</target>
+      </trans-unit>
+      <trans-unit id="no-requests-to-show" datatype="html">
+        <source>لا توجد طلبات لعرضها</source>
+        <target>No requests to display</target>
+      </trans-unit>
+      <trans-unit id="total-visits-chart" datatype="html">
+        <source>إجمالي الزيارات</source>
+        <target>Total Visits</target>
+      </trans-unit>
+      <trans-unit id="total-samples-chart" datatype="html">
+        <source>إجمالي العينات</source>
+        <target>Total Samples</target>
+      </trans-unit>
+      <trans-unit id="doctors-count" datatype="html">
+        <source>عدد الأطباء</source>
+        <target>Doctors Count</target>
+      </trans-unit>
+
+      <!-- Rating System -->
+      <trans-unit id="rep-evaluation-form" datatype="html">
+        <source>نموذج تقييم المندوب</source>
+        <target>Representative Evaluation Form</target>
+      </trans-unit>
+      <trans-unit id="choose-rep-name" datatype="html">
+        <source>اختر اسم المندوب</source>
+        <target>Choose Representative Name</target>
+      </trans-unit>
+      <trans-unit id="choose-visit-code" datatype="html">
+        <source>اختر كود الزيارة</source>
+        <target>Choose Visit Code</target>
+      </trans-unit>
+      <trans-unit id="report-title" datatype="html">
+        <source>عنوان التقرير</source>
+        <target>Report Title</target>
+      </trans-unit>
+      <trans-unit id="enter-report-title" datatype="html">
+        <source>أدخل عنوان التقرير</source>
+        <target>Enter report title</target>
+      </trans-unit>
+      <trans-unit id="recommendation" datatype="html">
+        <source>التوصية</source>
+        <target>Recommendation</target>
+      </trans-unit>
+      <trans-unit id="enter-recommendation" datatype="html">
+        <source>أدخل التوصية هنا ...</source>
+        <target>Enter recommendation here...</target>
+      </trans-unit>
+      <trans-unit id="additional-notes" datatype="html">
+        <source>ملاحظات إضافية</source>
+        <target>Additional Notes</target>
+      </trans-unit>
+      <trans-unit id="add-comments" datatype="html">
+        <source>أضف أي ملاحظات أو تعليقات هنا ...</source>
+        <target>Add any notes or comments here...</target>
+      </trans-unit>
+      <trans-unit id="planning" datatype="html">
+        <source>التخطيط</source>
+        <target>Planning</target>
+      </trans-unit>
+      <trans-unit id="personal-traits" datatype="html">
+        <source>السمات الشخصية</source>
+        <target>Personal Traits</target>
+      </trans-unit>
+      <trans-unit id="knowledge" datatype="html">
+        <source>المعرفة</source>
+        <target>Knowledge</target>
+      </trans-unit>
+      <trans-unit id="selling-skills" datatype="html">
+        <source>مهارات البيع</source>
+        <target>Selling Skills</target>
+      </trans-unit>
+      <trans-unit id="overall-result" datatype="html">
+        <source>النتيجة الإجمالية</source>
+        <target>Overall Result</target>
+      </trans-unit>
+      <trans-unit id="rating" datatype="html">
+        <source>التصنيف</source>
+        <target>Rating</target>
+      </trans-unit>
+      <trans-unit id="recommendations" datatype="html">
+        <source>التوصيات</source>
+        <target>Recommendations</target>
+      </trans-unit>
+      <trans-unit id="save-rating" datatype="html">
+        <source>حفظ التقييم</source>
+        <target>Save Rating</target>
+      </trans-unit>
+      <trans-unit id="points" datatype="html">
+        <source>نقاط</source>
+        <target>Points</target>
+      </trans-unit>
+
+      <!-- Work Days Management -->
+      <trans-unit id="add-holiday" datatype="html">
+        <source>إضافة عطلة</source>
+        <target>Add Holiday</target>
+      </trans-unit>
+      <trans-unit id="work-settings" datatype="html">
+        <source>اعدادت العمل</source>
+        <target>Work Settings</target>
+      </trans-unit>
+      <trans-unit id="work-days-count" datatype="html">
+        <source>أيام العمل</source>
+        <target>Work Days</target>
+      </trans-unit>
+      <trans-unit id="holiday-days" datatype="html">
+        <source>أيام العطل</source>
+        <target>Holiday Days</target>
+      </trans-unit>
+      <trans-unit id="total-days" datatype="html">
+        <source>إجمالي الأيام</source>
+        <target>Total Days</target>
+      </trans-unit>
+      <trans-unit id="modal-title" datatype="html">
+        <source>Modal title</source>
+        <target>Modal Title</target>
+      </trans-unit>
+      <trans-unit id="holiday-name" datatype="html">
+        <source>اسم العطلة</source>
+        <target>Holiday Name</target>
+      </trans-unit>
+      <trans-unit id="enter-holiday-name" datatype="html">
+        <source>ادخل اسم العطلة</source>
+        <target>Enter holiday name</target>
+      </trans-unit>
+      <trans-unit id="holiday-type" datatype="html">
+        <source>نوع العطلة</source>
+        <target>Holiday Type</target>
+      </trans-unit>
+      <trans-unit id="choose-holiday-type" datatype="html">
+        <source>اختر نوع العطلة</source>
+        <target>Choose holiday type</target>
+      </trans-unit>
+      <trans-unit id="religious-holiday" datatype="html">
+        <source>عطلة دينية</source>
+        <target>Religious Holiday</target>
+      </trans-unit>
+      <trans-unit id="national-holiday" datatype="html">
+        <source>عطلة وطنية</source>
+        <target>National Holiday</target>
+      </trans-unit>
+      <trans-unit id="custom-holiday" datatype="html">
+        <source>عطلة مخصصة</source>
+        <target>Custom Holiday</target>
+      </trans-unit>
+      <trans-unit id="add" datatype="html">
+        <source>اضافة</source>
+        <target>Add</target>
+      </trans-unit>
+      <trans-unit id="weekly-holidays" datatype="html">
+        <source>أيام العطل الأسبوعية</source>
+        <target>Weekly Holidays</target>
+      </trans-unit>
+      <trans-unit id="saturday" datatype="html">
+        <source>السبت</source>
+        <target>Saturday</target>
+      </trans-unit>
+      <trans-unit id="sunday" datatype="html">
+        <source>الأحد</source>
+        <target>Sunday</target>
+      </trans-unit>
+      <trans-unit id="monday" datatype="html">
+        <source>الإثنين</source>
+        <target>Monday</target>
+      </trans-unit>
+      <trans-unit id="tuesday" datatype="html">
+        <source>الثلاثاء</source>
+        <target>Tuesday</target>
+      </trans-unit>
+      <trans-unit id="wednesday" datatype="html">
+        <source>الأربعاء</source>
+        <target>Wednesday</target>
+      </trans-unit>
+      <trans-unit id="thursday" datatype="html">
+        <source>الخميس</source>
+        <target>Thursday</target>
+      </trans-unit>
+      <trans-unit id="friday" datatype="html">
+        <source>الجمعة</source>
+        <target>Friday</target>
+      </trans-unit>
+      <trans-unit id="work-hours" datatype="html">
+        <source>ساعات العمل</source>
+        <target>Work Hours</target>
+      </trans-unit>
+      <trans-unit id="from-time" datatype="html">
+        <source>من</source>
+        <target>From</target>
+      </trans-unit>
+      <trans-unit id="to-time" datatype="html">
+        <source>إلى</source>
+        <target>To</target>
+      </trans-unit>
+      <trans-unit id="delete-holiday" datatype="html">
+        <source>حذف العطلة</source>
+        <target>Delete Holiday</target>
+      </trans-unit>
+      <trans-unit id="confirm-delete-holiday" datatype="html">
+        <source>هل انت متأكد من حذف العطلة؟</source>
+        <target>Are you sure you want to delete the holiday?</target>
+      </trans-unit>
+      <trans-unit id="delete-btn" datatype="html">
+        <source>مسح</source>
+        <target>Delete</target>
+      </trans-unit>
+
+      <!-- Sheets Management -->
+      <trans-unit id="upload-data-file" datatype="html">
+        <source>رفع ملف بيانات</source>
+        <target>Upload Data File</target>
+      </trans-unit>
+      <trans-unit id="file-type" datatype="html">
+        <source>نوع الملف</source>
+        <target>File Type</target>
+      </trans-unit>
+      <trans-unit id="choose-file-type" datatype="html">
+        <source>اختر نوع الملف</source>
+        <target>Choose File Type</target>
+      </trans-unit>
+      <trans-unit id="users" datatype="html">
+        <source>مستحدمين</source>
+        <target>Users</target>
+      </trans-unit>
+      <trans-unit id="areas-cities" datatype="html">
+        <source>مناطق ومدن</source>
+        <target>Areas & Cities</target>
+      </trans-unit>
+      <trans-unit id="products" datatype="html">
+        <source>منتجات</source>
+        <target>Products</target>
+      </trans-unit>
+      <trans-unit id="product-messages" datatype="html">
+        <source>رسائل منتجات</source>
+        <target>Product Messages</target>
+      </trans-unit>
+      <trans-unit id="pharmacies" datatype="html">
+        <source>صيدليات</source>
+        <target>Pharmacies</target>
+      </trans-unit>
+      <trans-unit id="doctors" datatype="html">
+        <source>اطباء</source>
+        <target>Doctors</target>
+      </trans-unit>
+      <trans-unit id="upload-file" datatype="html">
+        <source>تحميل الملف</source>
+        <target>Upload File</target>
+      </trans-unit>
+      <trans-unit id="save-to-database" datatype="html">
+        <source>حفظ في قاعدة البيانات</source>
+        <target>Save to Database</target>
+      </trans-unit>
+
+      <!-- Chart Labels -->
+      <trans-unit id="doctors-visits-chart" datatype="html">
+        <source>زيارات الأطباء</source>
+        <target>Doctors Visits</target>
+      </trans-unit>
+      <trans-unit id="dates-visits-chart" datatype="html">
+        <source>زيارات التواريخ</source>
+        <target>Dates Visits</target>
+      </trans-unit>
+      <trans-unit id="cities-visits-chart" datatype="html">
+        <source>زيارات المدن</source>
+        <target>Cities Visits</target>
+      </trans-unit>
+      <trans-unit id="areas-visits-chart" datatype="html">
+        <source>زيارات المناطق</source>
+        <target>Areas Visits</target>
+      </trans-unit>
+      <trans-unit id="brands-visits-chart" datatype="html">
+        <source>زيارات العلامات التجارية</source>
+        <target>Brands Visits</target>
+      </trans-unit>
+      <trans-unit id="specializations-visits-chart" datatype="html">
+        <source>زيارات التخصصات</source>
+        <target>Specializations Visits</target>
+      </trans-unit>
+
+      <!-- Error Messages -->
+      <trans-unit id="required-field" datatype="html">
+        <source>{field} مطلوب</source>
+        <target>{field} is required</target>
+      </trans-unit>
+      <trans-unit id="invalid-email" datatype="html">
+        <source>البريد الإلكتروني غير صحيح</source>
+        <target>Invalid email address</target>
+      </trans-unit>
+      <trans-unit id="min-length" datatype="html">
+        <source>الحد الأدنى {length} أحرف</source>
+        <target>Minimum {length} characters</target>
+      </trans-unit>
+      <trans-unit id="invalid-format" datatype="html">
+        <source>تنسيق غير صحيح</source>
+        <target>Invalid format</target>
+      </trans-unit>
+      <trans-unit id="password-mismatch" datatype="html">
+        <source>كلمات المرور غير متطابقة</source>
+        <target>Passwords do not match</target>
+      </trans-unit>
+      <trans-unit id="validation-error" datatype="html">
+        <source>خطأ في التحقق</source>
+        <target>Validation error</target>
+      </trans-unit>
+
+      <!-- Success Messages -->
+      <trans-unit id="user-added-success" datatype="html">
+        <source>تم إضافة المستخدم بنجاح</source>
+        <target>User added successfully</target>
+      </trans-unit>
+      <trans-unit id="visit-added-success" datatype="html">
+        <source>تم اضافة زيارتك بنجاح</source>
+        <target>Your visit has been added successfully</target>
+      </trans-unit>
+      <trans-unit id="request-submitted-success" datatype="html">
+        <source>تم تقديم الطلب بنجاح</source>
+        <target>Request submitted successfully</target>
+      </trans-unit>
+      <trans-unit id="rating-saved-success" datatype="html">
+        <source>تم تسجيل التقييم بنجاح</source>
+        <target>Rating saved successfully</target>
+      </trans-unit>
+      <trans-unit id="holiday-added-success" datatype="html">
+        <source>تم اضافة العطلة بنجاح</source>
+        <target>Holiday added successfully</target>
+      </trans-unit>
+      <trans-unit id="weekly-holiday-added-success" datatype="html">
+        <source>تم اضافة العطلة الاسبوعية بنجاح</source>
+        <target>Weekly holiday added successfully</target>
+      </trans-unit>
+      <trans-unit id="holiday-deleted-success" datatype="html">
+        <source>تم حذف العطلة بنجاح</source>
+        <target>Holiday deleted successfully</target>
+      </trans-unit>
+      <trans-unit id="collection-approved-success" datatype="html">
+        <source>تم الموافقة على التحصيل بنجاح</source>
+        <target>Collection approved successfully</target>
+      </trans-unit>
+      <trans-unit id="collection-rejected-success" datatype="html">
+        <source>تم رفض التحصيل بنجاح</source>
+        <target>Collection rejected successfully</target>
+      </trans-unit>
+      <trans-unit id="order-approved-success" datatype="html">
+        <source>تم الموافقة على الطلب بنجاح</source>
+        <target>Order approved successfully</target>
+      </trans-unit>
+      <trans-unit id="order-rejected-success" datatype="html">
+        <source>تم رفض الطلب بنجاح</source>
+        <target>Order rejected successfully</target>
+      </trans-unit>
+      <trans-unit id="visit-registered-success" datatype="html">
+        <source>تم تسجيل الزيارة بنجاح</source>
+        <target>Visit registered successfully</target>
+      </trans-unit>
+
+      <!-- Additional Common Terms -->
+      <trans-unit id="choose" datatype="html">
+        <source>اختر</source>
+        <target>Choose</target>
+      </trans-unit>
+      <trans-unit id="select" datatype="html">
+        <source>تحديد</source>
+        <target>Select</target>
+      </trans-unit>
+      <trans-unit id="submit" datatype="html">
+        <source>إرسال</source>
+        <target>Submit</target>
+      </trans-unit>
+      <trans-unit id="confirm" datatype="html">
+        <source>تأكيد</source>
+        <target>Confirm</target>
+      </trans-unit>
+      <trans-unit id="back" datatype="html">
+        <source>رجوع</source>
+        <target>Back</target>
+      </trans-unit>
+      <trans-unit id="next" datatype="html">
+        <source>التالي</source>
+        <target>Next</target>
+      </trans-unit>
+      <trans-unit id="previous" datatype="html">
+        <source>السابق</source>
+        <target>Previous</target>
+      </trans-unit>
+      <trans-unit id="finish" datatype="html">
+        <source>إنهاء</source>
+        <target>Finish</target>
+      </trans-unit>
+      <trans-unit id="continue" datatype="html">
+        <source>متابعة</source>
+        <target>Continue</target>
+      </trans-unit>
+      <trans-unit id="update" datatype="html">
+        <source>تحديث</source>
+        <target>Update</target>
+      </trans-unit>
+      <trans-unit id="refresh" datatype="html">
+        <source>تحديث</source>
+        <target>Refresh</target>
+      </trans-unit>
+      <trans-unit id="clear" datatype="html">
+        <source>مسح</source>
+        <target>Clear</target>
+      </trans-unit>
+      <trans-unit id="reset-form" datatype="html">
+        <source>إعادة تعيين النموذج</source>
+        <target>Reset Form</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

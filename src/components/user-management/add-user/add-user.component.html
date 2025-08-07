@@ -1,0 +1,108 @@
+<c-card class="p-4 shadow">
+  <form cForm [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <!-- Full Name -->
+    <c-row class="mb-3">
+      <c-col>
+        <div class="d-flex justify-content-start align-items-center ">
+          <svg class="me-2 mb-2" [cIcon]="icons.cilPen" size="lg" title="User Icon"></svg>
+          <label cLabel class="form-label" i18n="@@full-name"> الاسم الكامل </label>
+        </div>
+        <input cInput type="text" class="form-control" formControlName="fullName" [placeholder]="$localize`:@@enter-full-name:أدخل الاسم الكامل`" />
+      </c-col>
+    </c-row>
+
+       <!-- User Name -->
+    <c-row class="mb-3">
+      <c-col>
+        <div class="d-flex justify-content-start align-items-center ">
+          <svg class="me-2 mb-2" [cIcon]="icons.cilUser" size="lg" title="User Icon"></svg>
+          <label cLabel class="form-label" i18n="@@username"> اسم المستخدم </label>
+        </div>
+        <input cInput type="text" class="form-control" formControlName="userName" [placeholder]="$localize`:@@enter-username:أدخل اسم المستخدم`" />
+      </c-col>
+    </c-row>
+
+    <!-- Email -->
+    <c-row class="mb-3">
+      <c-col>
+        <div class="d-flex justify-content-start align-items-center">
+          <svg class="me-2 mb-2" [cIcon]="icons.cilEnvelopeOpen" size="lg" title="Email Icon"></svg>
+          <label cLabel class="form-label" i18n="@@email"> البريد الإلكتروني </label>
+        </div>
+        <input cInput type="email" class="form-control text-end" formControlName="email" [placeholder]="$localize`:@@enter-email:أدخل البريد الإلكتروني`" />
+      </c-col>
+    </c-row>
+
+    <!-- Phone Number -->
+    <c-row class="mb-3">
+      <c-col>
+        <div class="d-flex justify-content-start align-items-center">
+          <svg class="me-2 mb-2" [cIcon]="icons.cilPhone" size="lg" title="Phone Icon"></svg>
+          <label cLabel class="form-label" i18n="@@phone"> رقم الهاتف </label>
+        </div>
+        <input cInput type="text" class="form-control" formControlName="phone" [placeholder]="$localize`:@@enter-phone:أدخل رقم الهاتف`" />
+      </c-col>
+    </c-row>
+
+    <!-- Password -->
+    <c-row class="mb-3">
+      <c-col>
+        <div class="d-flex justify-content-start align-items-center">
+          <svg class="me-2 mb-2" [cIcon]="icons.cilLockLocked" size="lg" title="Password Icon"></svg>
+          <label cLabel class="form-label" i18n="@@password"> كلمة المرور </label>
+        </div>
+        <input cInput type="password" class="form-control" formControlName="password" [placeholder]="$localize`:@@enter-password:أدخل كلمة المرور`" />
+      </c-col>
+    </c-row>
+
+        <!-- Confirm Password -->
+    <c-row class="mb-3">
+      <c-col>
+        <div class="d-flex justify-content-start align-items-center">
+          <svg class="me-2 mb-2" [cIcon]="icons.cilLockLocked" size="lg" title="Password Icon"></svg>
+          <label cLabel class="form-label" i18n="@@confirm-password"> تأكيد كلمة المرور </label>
+        </div>
+        <input cInput type="password" class="form-control" formControlName="confirmPassword" [placeholder]="$localize`:@@enter-confirm-password:أدخل تأكيد كلمة المرور`" />
+      </c-col>
+    </c-row>
+
+   <!-- Confirm Password -->
+    <c-row class="mb-3">
+      <c-col>
+        <div class="d-flex justify-content-start align-items-center">
+          <svg class="me-2 mb-2" [cIcon]="icons.cilShieldAlt" size="lg" title="Password Icon"></svg>
+          <label cLabel class="form-label" i18n="@@user-role">صلاحية المستخدم</label>
+        </div>
+        
+        <select aria-label="Default select example" cSelect class="form-select" formControlName="role">
+                <option value=null disabled i18n="@@select-user-role">اختر صلاحية المستخدم</option>
+                <option value="1" i18n="@@med-rep">مندوب اعلانات</option>
+                <option value="2" i18n="@@med-sup">مشرف اعلانات</option>
+                <option value="3" i18n="@@sales-rep">مندوب مبيعات</option>
+                <option value="4" i18n="@@sales-sup">مشرف مبيعات</option>
+                <option value="5" i18n="@@orders-officer">محصل طلبات</option>
+                <option value="6" i18n="@@financial-officer">محصل مدفوعات</option>
+                <option value="7" i18n="@@financial-manager">مدير مالي</option>
+                <option value="8" i18n="@@general-manager">مدير عام</option>
+                <option value="9" i18n="@@assistant">مساعد</option>
+                <option value="10" i18n="@@admin">مسئول</option>
+        </select>
+      </c-col>
+    </c-row>
+
+    <!-- Submit Button -->
+    <c-row class="mt-4">
+      <c-col xs="12">
+        <button cButton color="primary" size="md" type="submit" class="col-12 d-flex align-items-center justify-content-center" [disabled]="form.invalid">
+          <svg [cIcon]="icons.cilSave" class="me-2 align-middle" size="xl" title="Save Icon"></svg>
+          <span class="align-middle" i18n="@@add-user">إضافة مستخدم</span>
+        </button>
+      </c-col>
+    </c-row>
+  </form>
+</c-card>
+
+<!-- Additional styling or content -->
+<div class="pb-5"></div>
+<div class="pb-5"></div>

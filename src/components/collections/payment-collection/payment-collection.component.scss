@@ -1,0 +1,14 @@
+.accordion-button:not(.collapsed) {
+  background-color: #ccc !important;
+}
+
+
+::ng-deep button.accordion-button::after {
+  display: none !important;
+}
+
+.multi-custome{
+  width: 38% !important;
+}
+
+

@@ -1,0 +1,667 @@
+<div *ngIf="reportsLoading()" class="d-flex justify-content-center align-items-center py-5" style="min-height: 300px;">
+  <c-spinner size="lg" variant="grow" color="primary"></c-spinner>
+</div>
+
+<div *ngIf="!reportsLoading()">
+<c-row class="align-items-center mt-3 mb-4">
+  <c-col xs="12" sm="6" class="mb-3 mb-sm-0">
+    <c-card class="border-0 shadow-sm">
+      <c-card-body class="py-2">
+        <c-input-group>
+          <span cInputGroupText class="bg-light border-0 text-muted">من</span>
+          <c-date-picker
+            placeholder="اختر التاريخ"
+            [locale]="'ar'"
+            dir="rtl"
+            [formControl]="fromDateControl"
+            class="form-control border-0 bg-light"
+            size ="lg"
+            [maxDate]="fromMaxDate"
+            [selectionType]="'month'"
+          />
+        </c-input-group>
+      </c-card-body>
+    </c-card>
+  </c-col>
+
+  <c-col xs="12" sm="6">
+    <c-card class="border-0 shadow-sm">
+      <c-card-body class="py-2">
+        <c-input-group>
+          <span cInputGroupText class="bg-light border-0 text-muted">إلى</span>
+          <c-date-picker
+            [minDate]="toMinDate"
+            [maxDate]="toMaxDate"
+            placeholder="اختر التاريخ"
+            [locale]="'ar'"
+            [selectionType]="'month'"
+            dir="rtl"
+            [disabled]="!fromDateControl.value"
+            [formControl]="toDateControl"
+            class="form-control border-0 bg-light"
+            size ="lg"
+          />
+        </c-input-group>
+      </c-card-body>
+    </c-card>
+  </c-col>
+</c-row>
+
+<!-- Stats Cards Grid - Enhanced -->
+<c-row class="gy-4">
+  <!-- Doctors Information Card -->
+  <c-col xl="4" md="6" sm="12">
+    <c-card class="h-100 border-0 shadow-sm hover-shadow transition-all">
+      <c-card-body class="p-4">
+        <div class="d-flex align-items-center mb-3">
+          <div class="bg-primary bg-opacity-10 p-3 rounded-circle me-3">
+            <svg [cIcon]="icons.cilGroup" class="text-primary" size="xl"></svg>
+          </div>
+          <h3 class="h5 mb-0">معلومات الأطباء</h3>
+        </div>
+        
+        <div class="stats-list">
+          <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+            <span class="text-muted">عدد الأطباء الكلي:</span>
+            <span class="fw-bold text-danger">{{ reportsData().totalDoctors }}</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+            <a href="javascript:void(0)" (click)="openModal('doctorsWithoutVisitsModal')" 
+               class="text-decoration-none ">
+              <span class="hover-success">أطباء بدون زيارات:</span>
+            </a>
+            <span class="fw-bold text-info">{{ reportsData().doctorsWithoutVisits }}</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center py-2">
+            <span class="text-muted">نسبة تغطية الأطباء:</span>
+            <div class="d-flex align-items-center">
+              <span class="fw-bold text-primary">{{ reportsData().doctorsCoverage }}</span>
+              <c-spinner *ngIf="loading" size="sm"></c-spinner>
+            </div>
+          </div>
+        </div>
+      </c-card-body>
+    </c-card>
+  </c-col>
+
+  <!-- Goals & Achievement Card -->
+  <c-col xl="4" md="6" sm="12">
+    <c-card class="h-100 border-0 shadow-sm hover-shadow transition-all">
+      <c-card-body class="p-4">
+        <div class="d-flex align-items-center mb-3">
+          <div class="bg-success bg-opacity-10 p-3 rounded-circle me-3">
+            <svg [cIcon]="icons.cilBlurCircular" class="text-success" size="xl"></svg>
+          </div>
+          <h3 class="h5 mb-0">الأهداف والإنجاز</h3>
+        </div>
+        
+        <div class="stats-list">
+          <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+            <span class="text-muted">الزيارات المستهدفة:</span>
+            <span class="fw-bold text-success">{{ reportsData().targetVisits }}</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+            <a href="javascript:void(0)" (click)="openModal('completedVisitsModal')" 
+               class="text-decoration-none">
+              <span class="hover-success">الزيارات المحققة:</span>
+            </a>
+            <span class="fw-bold text-warning">{{ reportsData().completedVisits }}</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center py-2">
+            <span class="text-muted">نسبة الإنجاز:</span>
+              <span class="fw-bold text-info-emphasis">{{ reportsData().visitsCoverage }}</span>
+          </div>
+        </div>
+      </c-card-body>
+    </c-card>
+  </c-col>
+
+  <!-- Visit Rates Card -->
+  <c-col xl="4" md="6" sm="12">
+    <c-card class="h-100 border-0 shadow-sm hover-shadow transition-all">
+      <c-card-body class="p-4">
+        <div class="d-flex align-items-center mb-3">
+          <div class="bg-info bg-opacity-10 p-3 rounded-circle me-3">
+            <svg [cIcon]="icons.cilClock" class="text-info" size="xl"></svg>
+          </div>
+          <h3 class="h5 mb-0">معدلات الزيارات</h3>
+        </div>
+        
+        <div class="stats-list">
+          <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+            <span class="text-muted">المعدل اليومي المستهدف:</span>
+            <span class="fw-bold text-body-secondary">{{ reportsData().targetDailyVisits }}</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+            <span class="text-muted">المعدل اليومي الفعلي:</span>
+            <span class="fw-bold text-danger-emphasis">{{ reportsData().completedDailyVisitsRate }}</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center py-2">
+            <a href="javascript:void(0)" (click)="openModal('missedVisitsModal')" 
+               class="text-decoration-none ">
+              <span class="hover-success">الزيارات الغير محققة:</span>
+            </a>
+            <span class="fw-bold text-info-emphasis">{{ reportsData().missedVisits }}</span>
+          </div>
+        </div>
+      </c-card-body>
+    </c-card>
+  </c-col>
+
+  <!-- Work Days Card -->
+  <c-col xl="4" md="6" sm="12">
+    <c-card class="h-100 border-0 shadow-sm hover-shadow transition-all">
+      <c-card-body class="p-4">
+        <div class="d-flex align-items-center mb-3">
+          <div class="bg-danger bg-opacity-10 p-3 rounded-circle me-3">
+            <svg [cIcon]="icons.cilCalendar" class="text-danger" size="xl"></svg>
+          </div>
+          <h3 class="h5 mb-0">أيام العمل</h3>
+        </div>
+        
+        <div class="stats-list">
+          <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+            <span class="text-muted">أيام العمل المتوقعة:</span>
+            <span class="fw-bold text-primary-emphasis">{{ reportsData().targetWorkDays }}</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+            <a href="javascript:void(0)" (click)="openModal('completedWorkDaysModal')" 
+               class="text-decoration-none ">
+              <span class="hover-success">أيام العمل المحققة:</span>
+            </a>
+            <span class="fw-bold text-warning-emphasis">{{ reportsData().completedWorkDays }}</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center py-2">
+            <a href="javascript:void(0)" (click)="openModal('daysWithoutReportsModal')" 
+               class="text-decoration-none ">
+              <span class="hover-success">أيام بدون تقرير:</span>
+            </a>
+            <span class="fw-bold text-dark">{{ reportsData().workDaysWithoutReports }}</span>
+          </div>
+        </div>
+      </c-card-body>
+    </c-card>
+  </c-col>
+
+  <!-- Visit Classification Card -->
+  <c-col xl="4" md="6" sm="12">
+    <c-card class="h-100 border-0 shadow-sm hover-shadow transition-all">
+      <c-card-body class="p-4">
+        <div class="d-flex align-items-center mb-3">
+          <div class="bg-warning bg-opacity-10 p-3 rounded-circle me-3">
+            <svg [cIcon]="icons.cilCalendar" class="text-warning" size="xl"></svg>
+          </div>
+          <h3 class="h5 mb-0">تصنيف الزيارات</h3>
+        </div>
+        
+        <div class="stats-list">
+          <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+            <a href="javascript:void(0)" (click)="openModal('segmentAVisitsModal', 'A')" 
+               class="text-decoration-none">
+              <span class="hover-success">زيارات الفئة A:</span>
+            </a>
+            <span class="fw-bold text-info">{{ reportsData().segmentAVisits }}</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+            <a href="javascript:void(0)" (click)="openModal('segmentBVisitsModal', 'B')" 
+               class="text-decoration-none">
+              <span class="hover-success">زيارات الفئة B:</span>
+            </a>
+            <span class="fw-bold text-dark-emphasis">{{ reportsData().segmentBVisits }}</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center py-2">
+            <span class="text-muted">إجمالي الزيارات:</span>
+            <span class="fw-bold text-warning">{{ reportsData().totalVisits }}</span>
+          </div>
+        </div>
+      </c-card-body>
+    </c-card>
+  </c-col>
+
+</c-row>
+</div>
+
+
+<c-modal
+  alignment="center"
+  id="doctorsWithoutVisitsModal"
+  [visible]="activeModal === 'doctorsWithoutVisitsModal'"
+  (visibleChange)="modalVisibleChange($event, 'doctorsWithoutVisitsModal')"
+  class="w-100"
+  [backdrop] ="true"
+  [keyboard]="true"
+  size ="lg"
+>
+  <c-modal-header class="visit-card-header">
+    <div class="id-card-title">
+      <h5 cModalTitle>تقارير الاطباء</h5>
+      <div class="id-card-subtitle">تقرير الاطباء بدون زيارات</div>
+    </div>
+    <button (click)="closeModal()" cButtonClose class="white-close-btn"></button>
+  </c-modal-header>
+  <c-modal-body class="id-card-body">
+    
+    <!-- Loading state (shown when data is loading) -->
+<div *ngIf="isDoctorsWithoutVisitsModalLoading()" class="d-flex justify-content-center align-items-center py-5" style="min-height: 300px;">
+  <c-spinner size="lg" variant="grow" color="primary"></c-spinner>
+</div>
+<div *ngIf="!isDoctorsWithoutVisitsModalLoading()">
+    <c-smart-table
+  #smartTable="cSmartTable"
+  [columnSorter]="true"
+  [columns]="doctorsWithoutVisitsColumns"
+  [itemsPerPage]="10"
+  [items]="doctorsWithoutVisits()"
+  [sorterValue]="{ column: 'name', state: 'asc' }"
+  [tableBodyProps]="{align: 'middle'}"
+  [tableFilter]="true"
+  [tableFilterLabel]="''"
+  [tableFilterPlaceholder]="'بحث ...'"
+  [tableProps]="{ hover: true, striped: true, responsive: true }"
+  activePage="1"
+  cleaner
+  clickableRows
+  header
+  pagination
+  class="p-2"
+>
+  <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+    <td>
+      @switch (columnName) {
+        @default {
+          {{ tdContent }}
+        }
+      }
+    </td>
+  </ng-template>
+</c-smart-table>
+  </div>
+  </c-modal-body>
+  <c-modal-footer class="id-card-modal-footer">
+    <button (click)="closeModal()" cButton color="primary" class="visit-close-btn">
+      إغلاق
+    </button>
+  </c-modal-footer>
+</c-modal>
+
+<c-modal
+  alignment="center"
+  id="completedVisitsModal"
+  [visible]="activeModal === 'completedVisitsModal'"
+  (visibleChange)="modalVisibleChange($event, 'completedVisitsModal')"
+  class="w-100"
+  [backdrop] ="true"
+  [keyboard]="true"
+  size ="lg"
+>
+  <c-modal-header class="visit-card-header">
+    <div class="id-card-title">
+      <h5 cModalTitle>تقارير الاهداف والانجازات</h5>
+      <div class="id-card-subtitle">تقرير الزيارات المحققة</div>
+    </div>
+    <button (click)="closeModal()" cButtonClose class="white-close-btn"></button>
+  </c-modal-header>
+  <c-modal-body class="id-card-body">
+
+        <!-- Loading state (shown when data is loading) -->
+<div *ngIf="isCompletedVisitsModalLoading()" class="d-flex justify-content-center align-items-center py-5" style="min-height: 300px;">
+  <c-spinner size="lg" variant="grow" color="primary"></c-spinner>
+</div>
+
+<div *ngIf="!isCompletedVisitsModalLoading()">
+    <c-smart-table
+  #smartTable="cSmartTable"
+  [columnSorter]="true"
+  [columns]="completedVisitsColumns"
+  [itemsPerPage]="10"
+  [items]="completedVisits()"
+  [sorterValue]="{ column: 'name', state: 'asc' }"
+  [tableBodyProps]="{align: 'middle'}"
+  [tableFilter]="true"
+  [tableFilterLabel]="''"
+  [tableFilterPlaceholder]="'بحث ...'"
+  [tableProps]="{ hover: true, striped: true, responsive: true }"
+  activePage="1"
+  cleaner
+  clickableRows
+  header
+  pagination
+  class="p-2"
+>
+  <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+    <td>
+      @switch (columnName) {
+        @default {
+          {{ tdContent }}
+        }
+      }
+    </td>
+  </ng-template>
+</c-smart-table>
+</div>
+  </c-modal-body>
+  <c-modal-footer class="id-card-modal-footer">
+    <button (click)="closeModal()" cButton color="primary" class="visit-close-btn">
+      إغلاق
+    </button>
+  </c-modal-footer>
+</c-modal>
+
+<c-modal
+  alignment="center"
+   id="daysWithoutReportsModal"
+  [visible]="activeModal === 'daysWithoutReportsModal'"
+  (visibleChange)="modalVisibleChange($event, 'daysWithoutReportsModal')"
+  class="w-100"
+  [backdrop] ="true"
+  [keyboard]="true"
+  size ="lg"
+>
+  <c-modal-header class="visit-card-header">
+    <div class="id-card-title">
+      <h5 cModalTitle>تقارير ايام العمل</h5>
+      <div class="id-card-subtitle">تقرير الايام بدون تقارير</div>
+    </div>
+    <button (click)="closeModal()" cButtonClose class="white-close-btn"></button>
+  </c-modal-header>
+  <c-modal-body class="id-card-body">
+    
+            <!-- Loading state (shown when data is loading) -->
+<div *ngIf="isDaysWithoutReportsModalLoading()" class="d-flex justify-content-center align-items-center py-5" style="min-height: 300px;">
+  <c-spinner size="lg" variant="grow" color="primary"></c-spinner>
+</div>
+
+<div *ngIf="!isDaysWithoutReportsModalLoading()">
+
+
+      <c-smart-table
+  #smartTable="cSmartTable"
+  [columnSorter]="true"
+  [columns]="daysWithoutReportsColumns"
+  [itemsPerPage]="10"
+  [items]="daysWithoutReports()"
+  [sorterValue]="{ column: 'name', state: 'asc' }"
+  [tableBodyProps]="{align: 'middle'}"
+  [tableFilter]="true"
+  [tableFilterLabel]="''"
+  [tableFilterPlaceholder]="'بحث ...'"
+  [tableProps]="{ hover: true, striped: true, responsive: true }"
+  activePage="1"
+  cleaner
+  clickableRows
+  header
+  pagination
+  class="p-2"
+>
+  <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+    <td>
+      @switch (columnName) {
+        @default {
+          {{ tdContent }}
+        }
+      }
+    </td>
+  </ng-template>
+</c-smart-table>
+</div>
+  </c-modal-body>
+  <c-modal-footer class="id-card-modal-footer">
+    <button (click)="closeModal()" cButton color="primary" class="visit-close-btn">
+      إغلاق
+    </button>
+  </c-modal-footer>
+</c-modal>
+
+<c-modal
+  alignment="center"
+  id="segmentAVisitsModal"
+  [visible]="activeModal === 'segmentAVisitsModal'"
+  (visibleChange)="modalVisibleChange($event, 'segmentAVisitsModal')"
+  class="w-100"
+  [backdrop] ="true"
+  [keyboard]="true"
+  size ="lg"
+>
+  <c-modal-header class="visit-card-header">
+    <div class="id-card-title">
+      <h5 cModalTitle>تقارير تصنيف الزيارات</h5>
+      <div class="id-card-subtitle">تقرير زيارات الفئة A</div>
+    </div>
+    <button (click)="closeModal()" cButtonClose class="white-close-btn"></button>
+  </c-modal-header>
+  <c-modal-body class="id-card-body">
+
+
+        <!-- Loading state (shown when data is loading) -->
+<div *ngIf="isSegmentAVisitsModalLoading()" class="d-flex justify-content-center align-items-center py-5" style="min-height: 300px;">
+  <c-spinner size="lg" variant="grow" color="primary"></c-spinner>
+</div>
+
+<div *ngIf="!isSegmentAVisitsModalLoading()">
+        <c-smart-table
+  #smartTable="cSmartTable"
+  [columnSorter]="true"
+  [columns]="segmentVisitsColumns"
+  [itemsPerPage]="10"
+  [items]="segmentVisits()"
+  [sorterValue]="{ column: 'name', state: 'asc' }"
+  [tableBodyProps]="{align: 'middle'}"
+  [tableFilter]="true"
+  [tableFilterLabel]="''"
+  [tableFilterPlaceholder]="'بحث ...'"
+  [tableProps]="{ hover: true, striped: true, responsive: true }"
+  activePage="1"
+  cleaner
+  clickableRows
+  header
+  pagination
+  class="p-2"
+>
+  <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+    <td>
+      @switch (columnName) {
+        @default {
+          {{ tdContent }}
+        }
+      }
+    </td>
+  </ng-template>
+</c-smart-table>
+  </div>
+  </c-modal-body>
+  <c-modal-footer class="id-card-modal-footer">
+    <button (click)="closeModal()" cButton color="primary" class="visit-close-btn">
+      إغلاق
+    </button>
+  </c-modal-footer>
+</c-modal>
+
+<c-modal
+  alignment="center"
+  id="segmentBVisitsModal"
+  [visible]="activeModal === 'segmentBVisitsModal'"
+  (visibleChange)="modalVisibleChange($event, 'segmentBVisitsModal')"
+  class="w-100"
+  [backdrop] ="true"
+  [keyboard]="true"
+  size ="lg"
+>
+  <c-modal-header class="visit-card-header">
+    <div class="id-card-title">
+          <h5 cModalTitle>تقارير تصنيف الزيارات</h5>
+      <div class="id-card-subtitle">تقرير زيارات الفئة B</div>
+    </div>
+    <button (click)="closeModal()" cButtonClose class="white-close-btn"></button>
+  </c-modal-header>
+  <c-modal-body class="id-card-body">
+
+            <!-- Loading state (shown when data is loading) -->
+<div *ngIf="isSegmentBVisitsModalLoading()" class="d-flex justify-content-center align-items-center py-5" style="min-height: 300px;">
+  <c-spinner size="lg" variant="grow" color="primary"></c-spinner>
+</div>
+
+<div *ngIf="!isSegmentBVisitsModalLoading()">
+
+        <c-smart-table
+  #smartTable="cSmartTable"
+  [columnSorter]="true"
+  [columns]="segmentVisitsColumns"
+  [itemsPerPage]="10"
+  [items]="segmentVisits()"
+  [sorterValue]="{ column: 'name', state: 'asc' }"
+  [tableBodyProps]="{align: 'middle'}"
+  [tableFilter]="true"
+  [tableFilterLabel]="''"
+  [tableFilterPlaceholder]="'بحث ...'"
+  [tableProps]="{ hover: true, striped: true, responsive: true }"
+  activePage="1"
+  cleaner
+  clickableRows
+  header
+  pagination
+  class="p-2"
+>
+  <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+    <td>
+      @switch (columnName) {
+        @default {
+          {{ tdContent }}
+        }
+      }
+    </td>
+  </ng-template>
+</c-smart-table>
+  </div>
+  </c-modal-body>
+  <c-modal-footer class="id-card-modal-footer">
+    <button (click)="closeModal()" cButton color="primary" class="visit-close-btn">
+      إغلاق
+    </button>
+  </c-modal-footer>
+</c-modal>
+
+<c-modal
+  alignment="center"
+  id="missedVisitsModal"
+  (visibleChange)="modalVisibleChange($event, 'missedVisitsModal')"
+  [visible]="activeModal === 'missedVisitsModal'"
+  class="w-100"
+  [backdrop] ="true"
+  [keyboard]="true"
+  size ="lg"
+>
+  <c-modal-header class="visit-card-header">
+    <div class="id-card-title">
+      <h5 cModalTitle>تقارير معدلات الزيارة</h5>
+      <div class="id-card-subtitle">تقرير الزيارات الغير محققة</div>
+    </div>
+    <button (click)="closeModal()" cButtonClose class="white-close-btn"></button>
+  </c-modal-header>
+  <c-modal-body class="id-card-body">
+    
+                <!-- Loading state (shown when data is loading) -->
+<div *ngIf="isMissedVisitsModalLoading()" class="d-flex justify-content-center align-items-center py-5" style="min-height: 300px;">
+  <c-spinner size="lg" variant="grow" color="primary"></c-spinner>
+</div>
+
+<div *ngIf="!isMissedVisitsModalLoading()">
+
+      <c-smart-table
+  #smartTable="cSmartTable"
+  [columnSorter]="true"
+  [columns]="missedVisitsColumns"
+  [itemsPerPage]="10"
+  [items]="missedVisits()"
+  [sorterValue]="{ column: 'name', state: 'asc' }"
+  [tableBodyProps]="{align: 'middle'}"
+  [tableFilter]="true"
+  [tableFilterLabel]="''"
+  [tableFilterPlaceholder]="'بحث ...'"
+  [tableProps]="{ hover: true, striped: true, responsive: true }"
+  activePage="1"
+  cleaner
+  clickableRows
+  header
+  pagination
+  class="p-2"
+>
+  <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+    <td>
+      @switch (columnName) {
+        @default {
+          {{ tdContent }}
+        }
+      }
+    </td>
+  </ng-template>
+</c-smart-table>
+</div>
+  </c-modal-body>
+  <c-modal-footer class="id-card-modal-footer">
+    <button (click)="closeModal()" cButton color="primary" class="visit-close-btn">
+      إغلاق
+    </button>
+  </c-modal-footer>
+</c-modal>
+
+<c-modal
+  alignment="center"
+   id="completedWorkDaysModal"
+  [visible]="activeModal === 'completedWorkDaysModal'"
+  (visibleChange)="modalVisibleChange($event, 'completedWorkDaysModal')"
+  class="w-100"
+  [backdrop] ="true"
+  [keyboard]="true"
+  size ="lg"
+>
+  <c-modal-header class="visit-card-header">
+    <div class="id-card-title">
+      <h5 cModalTitle>تقارير ايام العمل</h5>
+      <div class="id-card-subtitle">تقرير ايام العمل المحققة</div>
+    </div>
+    <button (click)="closeModal()" cButtonClose class="white-close-btn"></button>
+  </c-modal-header>
+  <c-modal-body class="id-card-body">
+                <!-- Loading state (shown when data is loading) -->
+<div *ngIf="isCompletedWorkDaysModalLoading()" class="d-flex justify-content-center align-items-center py-5" style="min-height: 300px;">
+  <c-spinner size="lg" variant="grow" color="primary"></c-spinner>
+</div>
+  
+<div *ngIf="!isCompletedWorkDaysModalLoading()">
+       <c-smart-table
+  #smartTable="cSmartTable"
+  [columnSorter]="true"
+  [columns]="completedWorkDaysColumns"
+  [itemsPerPage]="10"
+  [items]="completedWorkDays()"
+  [sorterValue]="{ column: 'name', state: 'asc' }"
+  [tableBodyProps]="{align: 'middle'}"
+  [tableFilter]="true"
+  [tableFilterLabel]="''"
+  [tableFilterPlaceholder]="'بحث ...'"
+  [tableProps]="{ hover: true, striped: true, responsive: true }"
+  activePage="1"
+  cleaner
+  clickableRows
+  header
+  pagination
+  class="p-2"
+>
+  <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+    <td>
+      @switch (columnName) {
+        @default {
+          {{ tdContent }}
+        }
+      }
+    </td>
+  </ng-template>
+</c-smart-table>
+</div>
+  </c-modal-body>
+  <c-modal-footer class="id-card-modal-footer">
+    <button (click)="closeModal()" cButton color="primary" class="visit-close-btn">
+      إغلاق
+    </button>
+  </c-modal-footer>
+</c-modal>

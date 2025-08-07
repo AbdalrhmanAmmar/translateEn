@@ -1,0 +1,144 @@
+<div *ngIf="formLoading()" class="d-flex justify-content-center align-items-center py-5" style="min-height: 300px;">
+  <c-spinner size="lg" variant="grow" color="primary"></c-spinner>
+</div>
+
+<c-card class="p-3 shadow" *ngIf="!formLoading()">
+  <form cForm [formGroup]="submitSaleForm">
+    <c-row class="justify-content-between align-items-center flex-wrap">
+<c-col sm="12" md="6">
+  <c-input-group class="justify-content-center mt-3 flex-wrap">
+    <span cInputGroupText class="d-flex align-items-center flex-shrink-0 mb-2 mb-md-0">
+      <svg
+        class="me-2"
+        [cIcon]="icons.cilCalendar"
+        size="xl"
+        title="List Icon"
+       
+      ></svg>
+      تاريخ الطلب
+    </span>
+
+    <c-date-picker
+      formControlName="requestDate"
+      size="xl"
+      placeholder="اختر التاريخ"
+      class="w-50 w-md-50"
+      [locale]="'ar'"
+      dir="rtl"
+      [disabled]="true"
+    />
+  </c-input-group>
+</c-col>
+
+
+   <c-col sm="12" md="6">
+  <c-input-group class="justify-content-center mt-3 flex-wrap">
+    <span cInputGroupText class="d-flex align-items-center flex-shrink-0 mb-2 mb-md-0">
+      <svg
+        class="me-2"
+        [cIcon]="icons.cilCalendar"
+        size="xl"
+        title="List Icon"
+      ></svg>
+      تاريخ النشاط
+    </span>
+
+    <c-date-picker
+      formControlName="saleDate"
+      size="xl"
+      placeholder="اختر التاريخ"
+      class="w-50 w-md-50"
+      [locale]="'ar'"
+      dir="rtl"
+    />
+  </c-input-group>
+</c-col>
+
+
+
+      <c-col class="mt-4" sm="12">
+        <label cLabel>
+          <svg
+            class="me-1"
+            [cIcon]="icons.cilFile"
+            size="lg"
+            title="List Icon"
+          ></svg>
+          نوع النشاط
+        </label>
+        <select
+          aria-label="Default select example"
+          cSelect
+          formControlName="saleTypeId"
+        >
+          <option [value]="null" disabled>اختر نوع النشاط</option>
+          @for(sale of salesData().saleTypes ; track sale.id){
+          <option [value]="sale.id">{{ sale.value }}</option>
+          }
+        </select>
+      </c-col>
+
+      <c-col class="mt-4" sm="12">
+        <label cLabel>
+          <svg
+            class="me-1"
+            [cIcon]="icons.cilUser"
+            size="lg"
+            title="List Icon"
+          ></svg>
+          اسم الطبيب
+        </label>
+        <select
+          aria-label="Default select example"
+          cSelect
+          formControlName="doctorId"
+        >
+          <option [value]="null" disabled>اختر الطبيب</option>
+          @for(sale of salesData().doctors ; track sale.id){
+          <option [value]="sale.id">{{ sale.value }}</option>
+          }
+        </select>
+      </c-col>
+
+      <c-col class="mt-4" sm="12">
+        <label cLabel>
+          <svg
+            class="me-1"
+            [cIcon]="icons.cilDollar"
+            size="lg"
+            title="List Icon"
+          ></svg>
+          التكلفة
+        </label>
+        <input cFormControl value="0" type="number" formControlName="cost" />
+      </c-col>
+
+      <c-col class="mt-4" sm="12">
+        <label cLabel>
+          <svg
+            class="me-1"
+            [cIcon]="icons.cilDescription"
+            size="lg"
+            title="List Icon"
+          ></svg>
+          ملاحظات
+        </label>
+        <textarea
+          formControlName="notes"
+          cFormControl
+          placeholder=" أضف أي ملاحظات إضافية هنا ..."
+          rows="3"
+        ></textarea>
+      </c-col>
+    </c-row>
+    <button (click)="onSubmitForm()" cButton type="submit" class="mt-4 col-12">
+      <svg
+        [cIcon]="icons.cilSave"
+        class="me-2 align-middle"
+        size="xl"
+        title="Save Icon"
+      ></svg>
+      تسجيل النشاط
+    </button>
+  </form>
+</c-card>

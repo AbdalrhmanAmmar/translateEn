@@ -1,0 +1,225 @@
+
+
+<!-- work-calendar.component.html -->
+<div dir="rtl" class="p-4">
+  <!-- action buttons -->
+  <div class="d-flex justify-content-start mb-4">
+    <button cButton color="primary" class="me-2" [cModalToggle]="addHolidayModal.id">
+      <c-icon name="cil-plus" class="me-1"></c-icon>
+      إضافة عطلة
+    </button>
+    <button cButton color="secondary" [cModalToggle]="settingsModal.id">
+      <c-icon name="cil-settings" class="me-1"></c-icon>
+      الإعدادات
+    </button>
+  </div>
+
+  <!-- stats cards -->
+  <c-row gutter="4">
+
+
+    
+    <c-col md="4">
+      <c-card class="shadow-lg rounded-2 border-0">
+        <c-card-body class="d-flex justify-content-start align-items-center">
+          <img src="../../../assets/images/check-circle.svg" class="img-fluid svg-icon" title="Bell Icon"/>
+          <div class="text-start mx-4">
+            <div class="fw-bold fs-5">أيام العمل</div>
+            <div class="fs-2 fw-bold text-success">{{ workDaysCount() }}</div>
+          </div>
+        </c-card-body>
+      </c-card>
+    </c-col>
+
+        <c-col md="4">
+      <c-card class="shadow-lg rounded-2 border-0">
+        <c-card-body class="d-flex justify-content-start align-items-center">
+            <img src="../../../assets/images/circle-xmark.svg" class="img-fluid svg-icon" title="Bell Icon"/>
+          <div class="text-start mx-4">
+            <div class="fw-bold fs-5">أيام العطل</div>
+            <div class="fs-2 fw-bold text-danger">{{ holidayDaysCount() }}</div>
+          </div>
+          <c-icon name="cil-x-circle" class="fs-1 text-danger"></c-icon>
+        </c-card-body>
+      </c-card>
+    </c-col>
+
+    <c-col md="4">
+      <c-card class="shadow-lg rounded-2 border-0">
+        <c-card-body class="d-flex justify-content-start align-items-center">
+          <img src="../../../assets/images/calender-circle.svg" class="img-fluid svg-icon" title="Bell Icon"/>
+          <div class="text-start mx-4">
+            <div class="fw-bold fs-5">إجمالي الأيام</div>
+            <div class="fs-2 fw-bold total-svg-icon">{{ totalDaysCount() }}</div>
+          </div>
+        </c-card-body>
+      </c-card>
+    </c-col>
+  </c-row>
+</div>
+
+
+
+<!-- work‑days.component.html -->
+<div class="calendar‑page rounded-5">
+  <div class="calendar‑card rounded-5">
+    <!-- Loading state (shown when data is loading) -->
+    <full-calendar *ngIf="!calendarLoading()" [options]="calendarOptions()" class="rounded-5 shadow-lg" #calendar>
+    </full-calendar>
+  </div>
+</div>
+
+<div class="p-5"></div>
+
+
+<c-modal #addHolidayModal alignment="center" id="addHolidayModal">
+  <c-modal-header>
+    <h5 cModalTitle>Modal title</h5>
+    <button [cModalToggle]="addHolidayModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    
+
+    <form [formGroup]="holidayForm" >
+  <div class="mb-4">
+      <h6 class="mb-3">التاريخ</h6>
+      <c-row gutter="3">
+       <c-date-picker [date]="selectedHolidayDateToAdd" [showAdjacentDays]="false"/>
+      </c-row>
+ </div>
+
+   <div class="mb-4">
+      <h6 class="mb-3">اسم العطلة</h6>
+      <c-row gutter="3">
+          <c-input-group class="mb-3">
+            <input cFormControl placeholder="ادخل اسم العطلة" formControlName="holidayName"/>
+         </c-input-group>
+      </c-row>
+  </div>
+
+     <div class="mb-4">
+      <h6 class="mb-3">نوع العطلة</h6>
+      <c-row gutter="3">
+          <c-input-group class="mb-3">
+            <select cSelect id="inputGroupSelect01" formControlName="holidayType">
+              <option value=null disabled>اختر نوع العطلة</option>
+              <option value="1">عطلة دينية</option>
+              <option value="2">عطلة وطنية</option>
+              <option value="3">عطلة مخصصة</option>
+
+            </select>
+         </c-input-group>
+      </c-row>
+  </div>
+  
+</form>
+  </c-modal-body>
+  <c-modal-footer>
+    <button cButton color="primary" (click)="addHoliday()">اضافة</button>
+    <button [cModalToggle]="addHolidayModal.id" cButton color="secondary">
+      اغلاق
+    </button>
+  </c-modal-footer>
+</c-modal>
+
+<c-modal #settingsModal alignment="center" id="settingsModal">
+  <c-modal-header>
+    <h5 cModalTitle>اعدادت العمل</h5>
+    <button [cModalToggle]="settingsModal.id" cButtonClose></button>
+  </c-modal-header>
+
+  <!-- wrap both body & footer in the reactive <form> -->
+  <form
+    [formGroup]="weeklyHolidayForm"
+  >
+    <c-modal-body>
+      <!-- weekly off‑days -->
+      <div class="mb-4">
+        <h6 class="mb-3">أيام العطل الأسبوعية</h6>
+        <!-- bind to the FormArray -->
+        <div formArrayName="weekDays">
+          <c-row gutter="3">
+            <c-col
+              md="6"
+              *ngFor="let day of daysOfWeek; let i = index; trackBy: trackById"
+            >
+              <c-form-check>
+                <input
+                  cFormCheckInput
+                  type="checkbox"
+                  [formControlName]="i"
+                  [id]="'off-' + day.id"
+                />
+                <label
+                  cFormCheckLabel
+                  [for]="'off-' + day.id"
+                >
+                  {{ day.label }}
+                </label>
+              </c-form-check>
+            </c-col>
+          </c-row>
+        </div>
+      </div>
+
+      <!-- working hours -->
+      <div>
+        <h6 class="mb-3">ساعات العمل</h6>
+        <c-row gutter="3" class="align-items-center">
+          <c-col md="6">
+            <label cFormLabel for="fromTime">من</label>
+            <c-time-picker
+              formControlName="fromTime"
+              [id]="'fromTime'"
+            ></c-time-picker>
+          </c-col>
+
+          <c-col md="6">
+            <label cFormLabel for="toTime">إلى</label>
+            <c-time-picker
+              formControlName="toTime"
+              [id]="'toTime'"
+            ></c-time-picker>
+          </c-col>
+        </c-row>
+      </div>
+    </c-modal-body>
+
+    <c-modal-footer>
+      <!-- submit on enter or button click -->
+      <button
+        type="submit"
+        cButton
+        color="primary"
+        [disabled]="weeklyHolidayForm.invalid"
+        (click)="addWeeklyHoliday()"
+      >
+        حفظ
+      </button>
+      <button
+        type="button"
+        [cModalToggle]="settingsModal.id"
+        cButton
+        color="secondary"
+      >
+        اغلاق
+      </button>
+    </c-modal-footer>
+  </form>
+</c-modal>
+
+<c-modal #removeHolidayModal alignment="center" id="removeHolidayModal">
+  <c-modal-header>
+    <h5 cModalTitle>حذف العطلة</h5>
+    <button [cModalToggle]="removeHolidayModal.id" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    هل انت متأكد من حذف العطلة؟
+  </c-modal-body>
+  <c-modal-footer>
+    <button cButton color="danger" #close class="text-white" (click)="confirmRemove()">مسح</button>
+    <button [cModalToggle]="removeHolidayModal.id" cButton color="secondary" (click)="cancelRemove()">
+      اغلاق
+    </button>
+  </c-modal-footer>
+</c-modal>

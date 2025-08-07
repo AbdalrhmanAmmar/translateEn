@@ -1,0 +1,51 @@
+:host {
+  height: 6rem;
+  display: block;
+}
+
+p {
+  font-weight: 700;
+  line-height: 36px;
+  font-size: 30px;
+  text-align: center;
+}
+
+c-col:nth-child(1) p {
+  color: #2563eb;
+}
+
+c-col:nth-child(2) p {
+  color: #16a34a;
+}
+
+c-col:nth-child(3) p {
+  color: #9333ea;
+}
+
+h3 {
+  text-align: center;
+}
+
+.dashboard-chart {
+  height: 400px;
+
+  @media (max-width: 1200px) {
+    height: 350px;
+  }
+
+  @media (max-width: 992px) {
+    height: 320px;
+  }
+
+  @media (max-width: 768px) {
+    height: 300px;
+  }
+
+  @media (max-width: 576px) {
+    height: 280px;
+  }
+
+  @media (max-width: 400px) {
+    height: 260px;
+  }
+}

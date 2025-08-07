@@ -1,0 +1,8 @@
+.accordion-button:not(.collapsed) {
+  background-color: #ccc !important;
+}
+
+
+::ng-deep button.accordion-button::after {
+  display: none !important;
+}

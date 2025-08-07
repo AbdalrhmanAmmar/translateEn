@@ -1,0 +1,260 @@
+<c-card class="p-4 shadow-lg rounded-3 ">
+  <form cForm [formGroup]="form" (ngSubmit)="onSubmit()" class="" novalidate>
+    <!-- Visit Date Section -->
+    <c-card-body class="p-4">
+      <c-row class="g-3">
+        <c-col md="6">
+          <div class="d-flex align-items-center mb-2">
+            <svg [cIcon]="icons.cilCalendar" class="me-2 text-primary" size="lg"></svg>
+            <label cLabel class="form-label fw-semibold">تاريخ الزيارة</label>
+          </div>
+          <c-date-picker
+            formControlName="visitDate"
+            cFormControl
+            size="lg"
+            placeholder="اختر التاريخ"
+            [locale]="'ar'"
+            dir="rtl"
+            [minDate]="minDate"
+            [maxDate]="maxDate"
+          />
+        </c-col>
+
+        <!-- Pharmacy Selection -->
+        <c-col md="6">
+          <div class="d-flex align-items-center mb-2">
+            <svg [cIcon]="icons.cilMedicalCross" class="me-2 text-primary" size="lg"></svg>
+            <label cLabel class="form-label fw-semibold">اسم الصيدلية</label>
+          </div>
+          <select
+            cSelect
+            class="form-select-lg"
+            cFormControl
+            formControlName="pharmacyId"
+          >
+            <option [ngValue]="null">اختر الصيدلية</option>
+            @for (organization of pharmacyVisitFormLookups().organizations; track organization.id) {
+              <option [value]="organization.id">{{ organization.value }}</option>
+            }
+          </select>
+        </c-col>
+      </c-row>
+    </c-card-body>
+
+    <!-- Visit Type Options -->
+    <c-card-body class=" rounded-3 p-4 my-3">
+      <h5 class="mb-4 text-primary">نوع الزيارة</h5>
+      <c-row class="g-4">
+        @for (item of items; track item.id) {
+          <c-col sm="4" lg="2" class="mx-auto">
+            <div class="fw-bold mb-3 text-center text-dark">{{ item.label }}</div>
+            <div class="d-flex justify-content-center gap-3">
+              @for (opt of options; track $index) {
+                <c-form-check>
+                  <input
+                    cFormCheckInput
+                    type="radio"
+                    [name]="item.name"
+                    [value]="opt.value"
+                    id="{{ item.name }}-{{ opt.value }}"
+                    (change)="optionSelected(item.id, opt.value)"
+                    class="form-check-input-lg"
+                  />
+                  <label cFormCheckLabel [for]="item.name + '-' + opt.value" class="fs-6">
+                    {{ opt.label }}
+                  </label>
+                </c-form-check>
+              }
+            </div>
+          </c-col>
+        }
+      </c-row>
+    </c-card-body>
+
+    <!-- Introductory Visit Section -->
+    @if (form.get('isIntroductoryVisit')?.value) {
+      <c-card-body class=" p-4">
+        <h5 class="text-start text-primary mb-4">
+          <svg [cIcon]="icons.cilInfo" class="me-2"></svg>
+          بيانات الزيارة التعريفية
+        </h5>
+        
+        <div class="mb-3">
+          <label cLabel class="fw-semibold">ملاحظات الزيارة</label>
+          <textarea 
+            cFormControl 
+            rows="4" 
+            placeholder="أدخل ملاحظات الزيارة التعريفية" 
+            formControlName="introductoryVisitNotes"
+          ></textarea>
+        
+        </div>
+        
+        <div class="mb-3">
+          <label for="introductoryVisitImageUrl" class="form-label fw-semibold d-flex align-items-center">
+            <svg [cIcon]="icons.cilCloudUpload" class="me-2 text-primary"></svg>
+            صورة الزيارة
+          </label>
+          <input 
+            cFormControl 
+            type="file" 
+            id="introductoryVisitImageUrl"
+            accept="image/*"
+            formControlName="introductoryVisitImageUrl"
+          />
+          <small class="text-muted mt-1 d-block">يرجى رفع صورة توثق الزيارة التعريفية (JPG, PNG)</small>
+         
+        </div>
+      </c-card-body>
+     <hr class="my-0" />
+    }
+
+    <!-- Collection Section -->
+    @if (form.get('isCollection')?.value) {
+      <c-card-body class=" p-4">
+        <h5 class="text-start text-primary mb-4">
+          <svg [cIcon]="icons.cilMoney" class="me-2"></svg>
+          بيانات التحصيل
+        </h5>
+        
+        <c-row class="g-3">
+          <c-col md="6">
+            <label cLabel class="fw-semibold">المبلغ الكلي</label>
+            <div class="input-group">
+              <span class="input-group-text">د.ل</span>
+              <input
+              cFormControl
+                cInput
+                type="number"
+                formControlName="collectionAmount"
+                class="rounded-end-0 rounded-start-2"
+              />
+             
+            </div>
+          </c-col>
+          
+          <c-col md="6">
+            <label cLabel class="fw-semibold">رقم الوصل</label>
+            <input
+              cInput
+              type="text"
+              cFormControl
+              formControlName="invoiceNumber"
+            />
+           
+          </c-col>
+          
+          <c-col xs="12">
+            <label for="invoiceImageUrl" class="form-label fw-semibold d-flex align-items-center">
+              <svg [cIcon]="icons.cilCloudUpload" class="me-2 text-primary"></svg>
+              صورة الوصل
+            </label>
+            <input 
+              cFormControl 
+              type="file" 
+              id="invoiceImageUrl"
+              accept="image/*"
+              formControlName="invoiceImageUrl"
+            />
+            <small class="text-muted mt-1 d-block">يرجى رفع صورة واضحة للوصل (JPG, PNG)</small>
+         
+          </c-col>
+        </c-row>
+      </c-card-body>
+    <hr class="my-0" />
+    }
+
+    <!-- Request Section -->
+    @if (form.get('isRequest')?.value) {
+      <c-card-body class=" p-4">
+        <h5 class="text-start text-primary mb-4">
+          <svg [cIcon]="icons.cilCart" class="me-2"></svg>
+          منتجات الطلبية
+        </h5>
+        
+        <c-smart-table
+          [columns]="columns"
+          [items]="pharmacyVisitFormLookups().products"
+          [trackBy]="trackByProductId"
+          [columnSorter]="true"
+          [itemsPerPage]="5"
+          [sorterValue]="{ column: 'name', state: 'asc' }"
+          [tableBodyProps]="{ align: 'middle' }"
+          [tableProps]="{ 
+            hover: true, 
+            striped: true, 
+            responsive: true,
+            class: 'table-borderless'
+          }"
+          activePage="1"
+          pagination
+          clickableRows
+          (selectedItemsChange)="onSelectedItemsChange($event)"
+          header
+          selectable
+          [noItemsLabel]="'لا توجد منتجات متاحة'"
+          class="my-4"
+          #table="cSmartTable"
+        >
+          <ng-template
+            cTemplateId="tableData"
+            let-columnName="columnName"
+            let-item="item"
+            let-tdContent="tdContent"
+            let-i="index"
+          >
+            <td>
+              @switch (columnName) {
+                @case ('amount') {
+                  <input
+                    cInput
+                    type="number"
+                    class="form-control"
+                    style="width: 80px;"
+                    min="0"
+                    [value]="item.amount ?? 0"
+                    (input)="updateAmount(item, $event)"
+                  />
+                }
+                @case ('total') {
+                  <span class="fw-bold">{{ item.total ?? 0 }} دينار ليبي</span>
+                }
+                @default {
+                  {{ tdContent }}
+                }
+              }
+            </td>
+          </ng-template>
+        </c-smart-table>
+
+        <div class="d-flex justify-content-end align-items-center bg-light p-3 rounded-3">
+          <svg [cIcon]="icons.cilDollar" class="me-2 text-success" size="xl"></svg>
+          <label class="form-label fw-bold fs-5 mb-0">
+            المجموع الكلي للطلبية: {{ form.get('totalCost')?.value || 0 | number }} دينار ليبي
+          </label>
+        </div>
+      </c-card-body>
+      <hr class="my-0" />
+    }
+
+    <!-- Submit Button -->
+    <c-card-footer class="bg-transparent border-0 pt-4 d-flex justify-content-center">
+      <button
+        cButton
+        color="primary"
+        cFormControl
+        size="lg"
+        type="submit"
+        class="w-100 py-3 fw-bold"
+        [disabled]="form.invalid"
+      >
+        <svg [cIcon]="icons.cilSave" class="me-2"></svg>
+        تسجيل زيارة
+      </button>
+    </c-card-footer>
+  </form>
+</c-card>
+
+<div class="pb-5"></div>
+<div class="pb-5"></div>
+

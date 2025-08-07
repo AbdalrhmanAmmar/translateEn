@@ -1,0 +1,520 @@
+.btn-close:focus {
+  box-shadow: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.product {
+  padding: 15px;
+}
+
+.color1 {
+  background-color: #eff6ff;
+}
+.color2 {
+  background-color: #f0fdf4;
+}
+.color3 {
+  background-color: #faf5ff;
+}
+
+.strong1 {
+  color: #1e40af;
+}
+.strong2 {
+  color: #166534;
+}
+.strong3 {
+  color: #6b21a8;
+}
+
+.p1 {
+  color: #2563eb;
+}
+.p2 {
+  color: #16a34a;
+}
+.p3 {
+  color: #9333ea;
+}
+
+.modern-id-card {
+  max-width: 600px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: none;
+}
+
+.id-card-header {
+  background: linear-gradient(135deg, #1976d2, #0d47a1);
+  color: white;
+  padding: 1.5rem;
+  border-bottom: 4px solid #ffc107;
+  text-align: center;
+}
+
+.id-card-title h5 {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.id-card-subtitle {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.id-card-body {
+  padding: 0;
+  background: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+}
+
+.id-card-photo-placeholder {
+  width: 100px;
+  height: 100px;
+  margin: 1.5rem auto 1rem;
+  border-radius: 50%;
+  background: #e3f2fd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid #1976d2;
+  color: #1976d2;
+  font-size: 2.5rem;
+}
+
+.id-card-info {
+  padding: 0 2rem 1.5rem;
+}
+
+.id-card-row {
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 0.75rem;
+}
+
+.id-card-row:last-child {
+  border-bottom: none;
+}
+
+.id-card-col p {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.id-card-value {
+  color: #4645ab;
+  font-weight: 500;
+  margin-right: 2%;
+}
+
+.id-card-footer {
+  background: #e3f2fd;
+  padding: 0.75rem 2rem;
+  text-align: center;
+  border-top: 1px solid #bbdefb;
+}
+
+.id-card-barcode {
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+  color: #555;
+  font-weight: bold;
+}
+
+.id-card-modal-footer {
+  justify-content: center;
+  background: #f8f9fa;
+  border-top: none;
+  padding-bottom: 1.5rem;
+}
+
+.id-card-close-btn {
+  border-radius: 20px;
+  padding: 0.5rem 2rem;
+  font-weight: 500;
+  box-shadow: 0 2px 5px rgb(238, 237, 237) ;
+}
+
+[cModalTitle] {
+  font-family: 'Tajawal', sans-serif;
+}
+
+.id-card-col p {
+  text-align: right;
+  direction: rtl;
+}
+
+.white-close-btn {
+  filter: invert(1) brightness(2);
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+  font-weight: bolder;
+}
+
+.white-close-btn:hover {
+  opacity: 1;
+}
+
+.visit-card-header {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  padding: 1.5rem;
+  border-bottom: 4px solid #ffc107;
+  text-align: center;
+}
+
+.visit-card-title h5 {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.visit-card-subtitle {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.visit-card-body {
+  padding: 1.5rem;
+  background: #f8f9fa;
+}
+
+.visit-info-container {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.visit-info-section, .products-section {
+  flex: 1;
+  background: white;
+  border-radius: 8px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 1.1rem;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #f1f1f1;
+  display: flex;
+  align-items: center;
+}
+
+.section-icon {
+  margin-left: 8px;
+  color: #6a11cb;
+}
+
+.info-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed #eee;
+}
+
+.info-row {
+  margin-bottom: 5%;
+}
+
+.info-label {
+  font-weight: 600;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+.info-value {
+  color: #333;
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
+}
+
+.info-link {
+  color: #2575fc;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.info-link:hover {
+  color: #6a11cb;
+  text-decoration: underline;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.product-card {
+  border-radius: 8px;
+  padding: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-3px);
+}
+
+.product-header {
+  margin-bottom: 0.5rem;
+}
+
+.product-name {
+  font-weight: 600;
+  color: #2c3e50;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.product-name:hover {
+  color: #6a11cb;
+}
+
+.product-details {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.samples-count {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* Product color variants */
+.product-color-1 {
+  background-color: #e3f2fd;
+  border-left: 4px solid #1976d2;
+}
+
+.product-color-2 {
+  background-color: #e8f5e9;
+  border-left: 4px solid #388e3c;
+}
+
+.product-color-3 {
+  background-color: #fff8e1;
+  border-left: 4px solid #ffa000;
+}
+
+.product-color-4 {
+  background-color: #f3e5f5;
+  border-left: 4px solid #8e24aa;
+}
+
+.visit-card-footer {
+  justify-content: center;
+  background: #f8f9fa;
+  border-top: none;
+  padding-bottom: 1.5rem;
+}
+
+.visit-close-btn {
+  border-radius: 20px;
+  padding: 0.5rem 2rem;
+  font-weight: 500;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.visit-close-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  opacity: 0.9;
+}
+
+/* White close button */
+.white-close-btn {
+  filter: invert(1) brightness(2);
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.white-close-btn:hover {
+  opacity: 1;
+}
+
+/* RTL specific styles */
+[cModalTitle] {
+  font-family: 'Tajawal', sans-serif;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .visit-info-container {
+    flex-direction: column;
+  }
+  
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .products-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.modern-visit-card {
+  max-width: 950px;
+  width: 100%;
+}
+
+/* Bolder font weights */
+.visit-card-title h5 {
+  font-weight: 700; /* Increased from 600 */
+}
+
+.section-title {
+  font-weight: 650;
+}
+
+.info-title {
+  font-weight: 700; /* Increased from 600 */
+}
+
+.product-label {
+  font-weight: 700; /* Increased from 600 */
+}
+
+.visit-close-btn {
+  font-weight: 600;
+}
+
+/* Wider product boxes */
+.products-grid {
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); /* Increased from 200px */
+  gap: 1.25rem; /* Slightly increased gap */
+}
+
+.product-card {
+  padding: 1.25rem; /* Increased from 1rem */
+}
+
+/* More prominent product names */
+.product-name {
+  font-weight: 600;
+  font-size: 1rem; /* Slightly larger */
+}
+
+/* Modern Link Styling */
+.samples-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #3b82f6 !important; /* Modern blue */
+  text-decoration: none !important;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.375rem;
+  transition: all 0.2s ease;
+  background-color: rgba(59, 130, 246, 0.1); /* Light blue bg */
+}
+
+.samples-link:hover {
+  background-color: rgba(59, 130, 246, 0.2); /* Darker on hover */
+  transform: translateY(-1px);
+}
+
+.samples-link i {
+  font-size: 0.9em;
+}
+
+.samples-link.no-icon {
+  padding: 0.35rem 0.75rem; /* Adjust padding */
+}
+
+/* Base Link Style */
+.data-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none !important;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  margin: 0.25rem 0;
+}
+
+/* Visits (Purple Theme) */
+.data-link.visits {
+  color: #7c3aed !important;
+  background-color: rgba(124, 58, 237, 0.1);
+}
+.data-link.visits:hover {
+  background-color: rgba(124, 58, 237, 0.2);
+}
+
+/* Samples (Blue Theme) */
+.data-link.samples {
+  color: #3b82f6 !important;
+  background-color: rgba(59, 130, 246, 0.1);
+}
+.data-link.samples:hover {
+  background-color: rgba(59, 130, 246, 0.2);
+}
+
+/* Sales (Emerald Theme) */
+.data-link.sales {
+  color: #10b981 !important;
+  background-color: rgba(16, 185, 129, 0.1);
+}
+.data-link.sales:hover {
+  background-color: rgba(16, 185, 129, 0.2);
+}
+
+/* Icons */
+.data-link i {
+  font-size: 0.9em;
+}
+
+/* Product color variants */
+.brand-color-1 {
+  color: #7c3aed !important;
+  background-color: rgba(124, 58, 237, 0.1);
+  padding: 0.2rem 0.6rem;
+}
+
+.brand-color-2 {
+  color: #3b82f6 !important;
+  background-color: rgba(59, 130, 246, 0.1);
+  padding: 0.2rem 0.6rem;
+}
+
+.brand-color-3 {
+  color: #10b981 !important;
+  background-color: rgba(16, 185, 129, 0.1);
+  padding: 0.2rem 0.6rem;
+}
+
+.brand-color-1:hover {
+    background-color: rgba(124, 58, 237, 0.2);
+}
+
+.brand-color-2:hover {
+  background-color: rgba(59, 130, 246, 0.2);
+}
+
+.brand-color-3:hover {
+  background-color: rgba(16, 185, 129, 0.2);
+}
